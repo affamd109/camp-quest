@@ -1,0 +1,40 @@
+<% layout('layouts/boilerplate')%>
+
+<div class="flex justify-center mt-6 font-serif mb-4">
+    <div class="w-full max-w-md bg-white shadow-md rounded-lg overflow-hidden">
+
+        <img src="<%= campground.image %>" alt="Campground Image" class="w-full h-64 object-cover">
+        
+
+        <div class="p-4">
+            <h5 class="text-2xl text-black font-bold mb-2"><%= campground.title %></h5>
+            <hr class="border-t border-gray-400 my-3 mb-1 ">
+
+            <p class="text-gray-500 mb-4 mt-4"><%= campground.description %></p>
+
+            <hr class="border-t border-gray-400 my-3 mb-1 ">
+
+            <ul class="border-t border-b divide-y">
+                <li class="py-2 text-gray-500 font-semibold"><%= campground.location %></li>
+                <li class="py-2 text-gray-500 font-bold">$<%= campground.price %>/night</li>
+            </ul>
+
+            <div class="flex justify-between items-center mt-4">
+                <a href="/campgrounds/<%=campground._id%>/edit" 
+                   class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
+                   Edit
+                </a>
+                <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                    <button class="px-4 py-2 cursor-pointer bg-red-500 text-white rounded-md hover:bg-red-600 transition">
+                        Delete
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+
+        <div class="p-3 text-gray-500 text-sm bg-gray-100">
+            2 days ago
+        </div>
+    </div>
+</div>
