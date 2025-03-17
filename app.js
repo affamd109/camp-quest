@@ -8,6 +8,7 @@ const ExpressError = require('./utils/ExpressError');
 const Joi = require('joi');
 const {campgroundSchema} = require('./schemas.js');
 const Campground = require('./models/campground');
+const Review = require('./models/review');
 const methodOverride = require('method-override');
 
 mongoose.connect('mongodb://127.0.0.1:27017/campquest');
@@ -95,6 +96,10 @@ app.delete('/campgrounds/:id' , catchAsync(async (req , res) =>{
     const campground = await Campground.findByIdAndDelete(id);
     res.redirect('/campgrounds');
 
+}))
+
+app.post('/campgrounds/:id/reviews' , catchAsync(async(req , res) => {
+    res.send('HEYYEYEYE');
 }))
 
 app.all(/(.*)/, (req, res, next) => {

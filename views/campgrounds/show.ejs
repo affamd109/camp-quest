@@ -34,7 +34,33 @@
         </div>
 
         <div class="p-3 text-gray-500 text-sm bg-gray-100">
-            2 days ago
+
         </div>
+
+        <div class="mt-2 p-4 pt-2 bg-white shadow-md rounded-lg">
+            <h2 class="text-xl font-semibold text-gray-800 mb-3">Leave a Review</h2>
+            
+            <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="space-y-4">
+                <div>
+                    <label for="rating" class="block text-gray-700 font-medium mb-1">Rating</label>
+                    <input type="range" min="1" max="5" name="review[rating]" id="rating" 
+                           class="w-full cursor-pointer accent-blue-500">
+                </div>
+                
+                <div>
+                    <label for="body" class="block text-gray-700 font-medium mb-1">Review</label>
+                    <textarea name="review[body]" id="body" cols="30" rows="3" required
+                              class="w-full p-2 border border-gray-400 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                </div>
+                
+                <button class="w-1/5 cursor-pointer bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
+                    Submit
+                </button>
+            </form>
+        </div>
+
+        
+
+        
     </div>
 </div>
