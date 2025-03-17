@@ -1965,6 +1965,9 @@
   .text-green-100 {
     color: var(--color-green-100);
   }
+  .text-green-600 {
+    color: var(--color-green-600);
+  }
   .text-red-500 {
     color: var(--color-red-500);
   }
@@ -2477,6 +2480,16 @@
   .peer-checked\:text-yellow-400 {
     &:is(:where(.peer):checked ~ *) {
       color: var(--color-yellow-400);
+    }
+  }
+  .peer-valid\:block {
+    &:is(:where(.peer):valid ~ *) {
+      display: block;
+    }
+  }
+  .peer-invalid\:block {
+    &:is(:where(.peer):invalid ~ *) {
+      display: block;
     }
   }
   .hover\:scale-105 {
