@@ -1,66 +1,61 @@
-<% layout('layouts/boilerplate')%>
+<%- layout('layouts/boilerplate')%>
 
-<div class="flex justify-center mt-6 font-serif mb-4">
-    <div class="w-full max-w-md bg-white shadow-md rounded-lg overflow-hidden">
-
-        <img src="<%= campground.image %>" alt="Campground Image" class="w-full h-64 object-cover">
+<div class="flex justify-center mt-8 font-sans mb-6">
+    <div class="w-full max-w-md bg-white shadow-lg rounded-xl overflow-hidden">
         
+        <!-- Image Section -->
+        <div class="relative">
+            <img src="<%= campground.image %>" alt="<%= campground.title %>" class="w-full h-80 object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            <h1 class="absolute bottom-4 left-6 text-3xl text-white font-bold"><%= campground.title %></h1>
+        </div>
 
-        <div class="p-4">
-            <h5 class="text-2xl text-black font-bold mb-2"><%= campground.title %></h5>
-            <hr class="border-t border-gray-400 my-3 mb-1 ">
+        <!-- Details Section -->
+        <div class="p-6">
+            <div class="flex justify-between bg-gray-50 p-4 rounded-lg shadow-sm mb-6">
+                <span class="text-gray-700 font-medium"><%= campground.location %></span>
+                <span class="text-gray-900 font-bold text-lg">$<%= campground.price %>/night</span>
+            </div>
 
-            <p class="text-gray-500 mb-4 mt-4"><%= campground.description %></p>
+            <h2 class="text-xl font-semibold text-gray-800 mb-3">About this spot</h2>
+            <p class="text-gray-600 leading-relaxed mb-8"><%= campground.description %></p>
 
-            <hr class="border-t border-gray-400 my-3 mb-1 ">
-
-            <ul class="border-t border-b divide-y">
-                <li class="py-2 text-gray-500 font-semibold"><%= campground.location %></li>
-                <li class="py-2 text-gray-500 font-bold">$<%= campground.price %>/night</li>
-            </ul>
-
-            <div class="flex justify-between items-center mt-4">
+            <!-- Buttons -->
+            <div class="flex justify-between mt-8">
                 <a href="/campgrounds/<%=campground._id%>/edit" 
-                   class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition">
+                   class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
                    Edit
                 </a>
                 <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
-                    <button class="px-4 py-2 cursor-pointer bg-red-500 text-white rounded-md hover:bg-red-600 transition">
+                    <button class="px-6 cursor-pointer py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700">
                         Delete
                     </button>
                 </form>
             </div>
-            
         </div>
+        
 
-        <div class="p-3 text-gray-500 text-sm bg-gray-100">
-
-        </div>
-
-        <div class="mt-2 p-4 pt-2 bg-white shadow-md rounded-lg">
-            <h2 class="text-xl font-semibold text-gray-800 mb-3">Leave a Review</h2>
+        <!-- Review Section -->
+        <div class="mt-4 p-6 bg-gray-50 rounded-b-xl">
+            <h2 class="text-2xl font-semibold text-gray-800 mb-5">Leave a Review</h2>
             
-            <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="space-y-4">
+            <form action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="space-y-5">
                 <div>
-                    <label for="rating" class="block text-gray-700 font-medium mb-1">Rating</label>
-                    <input type="range" min="1" max="5" name="review[rating]" id="rating" 
-                           class="w-full cursor-pointer accent-blue-500">
+                    <label class="block text-gray-700 font-medium mb-2">Rating</label>
+                    <input type="range" min="1" max="5" name="review[rating]" 
+                           class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer">
                 </div>
                 
                 <div>
-                    <label for="body" class="block text-gray-700 font-medium mb-1">Review</label>
-                    <textarea name="review[body]" id="body" cols="30" rows="3" required
-                              class="w-full p-2 border border-gray-400 text-black rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+                    <label class="block text-gray-700 font-medium mb-2">Review</label>
+                    <textarea name="review[body]" rows="4" required
+                              class="w-full p-3 border border-gray-400 rounded-lg focus:ring-blue-400"></textarea>
                 </div>
                 
-                <button class="w-1/5 cursor-pointer bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition">
-                    Submit
+                <button class="w-1/5 py-2 cursor-pointer bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">
+                    Submit 
                 </button>
             </form>
         </div>
-
-        
-
-        
     </div>
 </div>
