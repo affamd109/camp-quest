@@ -1,117 +1,184 @@
-<%- layout('layouts/boilerplate')%>
+<%- layout('layouts/boilerplate') %>
 
-    <div class="flex justify-center mt-8 font-sans mb-6">
-        <div class="w-full max-w-md bg-white shadow-lg rounded-xl overflow-hidden">
+<div class="container mx-auto px-4 py-12">
+    <!-- Main Header -->
+    <div class="mb-8 border-b border-gray-800 pb-8">
+        <h1 class="text-4xl font-bold font-serif text-blue-400 mb-4"><%= campground.title %></h1>
+        <div class="flex items-center gap-4 text-gray-400">
+            <div class="flex items-center gap-2">
+                <i class="fas fa-map-marker-alt text-blue-400"></i>
+                <%= campground.location %>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fas fa-star text-amber-400"></i>
+                5.0 
+            </div>
+        </div>
+    </div>
 
-            <!-- Image Section -->
-            <div class="relative">
-                <img src="<%= campground.image %>" alt="<%= campground.title %>" class="w-full h-80 object-cover">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                <h1 class="absolute bottom-4 left-6 text-3xl text-white font-bold">
-                    <%= campground.title %>
-                </h1>
+    <!-- Main Content -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column -->
+        <div class="lg:col-span-2">
+            <div class="overflow-hidden border-2 border-gray-800">
+                <img src="<%= campground.image %>" alt="<%= campground.title %>" 
+                     class="w-full h-96 object-cover hover:brightness-110 transition-all">
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="  border-t-2 border-b-2 border-gray-800 p-6  sticky top-4">
+            <div class="border-b border-gray-800 pb-6 mb-6">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <span class="text-2xl font-bold text-white">
+                            $<%= campground.price %>
+                            <span class="text-gray-400 text-lg">/ night</span>
+                        </span>
+                    </div>
+                    <button class="text-gray-400 hover:text-white">
+                        <i class="far fa-heart text-xl"></i>
+                    </button>
+                </div>
             </div>
 
-            <!-- Details Section -->
-            <div class="p-6">
-                <div class="flex justify-between bg-gray-50 p-4 rounded-lg shadow-sm mb-6">
-                    <span class="text-gray-700 font-medium">
-                        <%= campground.location %>
-                    </span>
-                    <span class="text-gray-900 font-bold text-lg">$<%= campground.price %>/night</span>
+            
+            <div class="space-y-3 mt-4 text-gray-300">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-home text-blue-400"></i> <span>Entire campground</span>
                 </div>
-
-                <h2 class="text-xl font-semibold text-gray-800 mb-3">About this spot</h2>
-                <p class="text-gray-600 leading-relaxed mb-8">
-                    <%= campground.description %>
-                </p>
-
-                <!-- Buttons -->
-                <div class="flex justify-between mt-8">
-                    <a href="/campgrounds/<%=campground._id%>/edit"
-                        class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-                        Edit
-                    </a>
-                    <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
-                        <button class="px-6 cursor-pointer py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700">
-                            Delete
-                        </button>
-                    </form>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-users text-blue-400"></i> <span>Up to 10 guests</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-bed text-blue-400"></i> <span>5 tent spots</span>
                 </div>
             </div>
 
-
-            <!-- Review Section -->
-            <div class="mt-4 p-6 bg-gray-50 rounded-b-xl">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-5">Leave a Review</h2>
-
-                <form id="review-form" action="/campgrounds/<%=campground._id%>/reviews" method="POST" class="space-y-5"
-                    novalidate>
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Rating</label>
-                        <input type="range" min="1" max="5" name="review[rating]"
-                            class="w-full h-2 bg-gray-200 rounded-lg cursor-pointer">
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-700 font-medium mb-2">Review</label>
-                        <textarea id="review-body" name="review[body]" rows="4" required
-                            class="w-full text-black p-3 border border-gray-400 rounded-lg focus:ring-blue-400"></textarea>
-                        <p id="error-message" class="text-red-500 text-sm hidden">Review is required.</p>
-                    </div>
-
-                    <button class="w-1/5 py-2 cursor-pointer bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">
-                        Submit
+            <div class="border-t border-gray-800 pt-6 space-y-4">
+                <a href="/campgrounds/<%=campground._id%>/edit"
+                   class="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-gray-300 transition-colors">
+                    <i class="fas fa-edit"></i>
+                    Edit Listing
+                </a>
+                <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                    <button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-800 hover:bg-red-700 rounded-xl text-red-100 transition-colors">
+                        <i class="fas fa-trash"></i>
+                        Delete Listing
                     </button>
                 </form>
             </div>
         </div>
     </div>
-    <script>
-        (function () {
-            'use strict';
 
-            const form = document.getElementById('review-form');
-            const inputs = form.querySelectorAll('textarea[required]');
+    <!-- Description -->
+    <div class="max-w-3xl mt-6 p-8 rounded-2xl ">
+        <h3 class="text-2xl font-bold mb-4">Popular amenities</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-300">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-couch text-xl"></i>
+                <span>Lounge area</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-wind text-xl"></i>
+                <span>Air conditioning</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-kitchen-set text-xl"></i>
+                <span>Kitchen</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-soap text-xl"></i>
+                <span>Laundry facilities</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-temperature-low text-xl"></i>
+                <span>Refrigerator</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-square-parking text-xl"></i>
+                <span>Free parking</span>
+            </div>
+        </div>
+    </div>
 
-            form.addEventListener('submit', function (event) {
-                let isValid = true;
+    <!-- Reviews -->
+    <div class="mt-12 max-w-2xl">
+        <h2 class="text-2xl font-bold text-white mb-6">
+            <i class="fas fa-comments font-serif mr-2 text-blue-400"></i>Guest Reviews
+            <span class="text-gray-400 text-lg">(<%= campground.reviews.length %>)</span>
+        </h2>
+        <!-- Review Form -->
+        <div class="bg-gray-900 p-6 rounded-2xl border border-gray-800 mb-8">
+            <h3 class="text-xl font-semibold text-white mb-6">Write a Review</h3>
+            <form id="review-form" action="/campgrounds/<%=campground._id%>/reviews" method="POST">
+                <div class="mb-6">
+                    <div class="flex gap-2 text-2xl text-amber-400 mb-4">
+                        <% for(let i=1; i<=5; i++) { %>
+                            <button type="button" class="rating-star hover:text-amber-300" data-value="<%= i %>">
+                                <i class="far fa-star"></i>
+                            </button>
+                        <% } %>
+                    </div>
+                    <input type="hidden" name="review[rating]" id="rating-value" required>
+                </div>
 
-                inputs.forEach(input => {
-                    const errorMessage = input.nextElementSibling;
+                <div class="mb-6">
+                    <textarea name="review[body]" rows="4" 
+                              class="w-full p-4 bg-gray-800 border border-gray-700 rounded-xl text-gray-300 placeholder-gray-500"
+                              placeholder="Share your experience..." required></textarea>
+                </div>
 
-                    if (!input.value.trim()) {
-                        event.preventDefault();
-                        input.classList.add('border-red-500', 'focus:ring-red-500');
-                        errorMessage.classList.remove('hidden');
-                        isValid = false;
-                    } else {
-                        input.classList.remove('border-red-500', 'focus:ring-red-500');
-                        input.classList.add('border-green-500', 'focus:ring-green-500');
-                        errorMessage.classList.add('hidden');
-                    }
-                });
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold transition-colors">
+                    Submit Review
+                </button>
+            </form>
+        </div>
 
-                if (!isValid) {
-                    event.preventDefault();
-                }
+        <!-- Reviews List -->
+        <div class="space-y-6">
+            <% for(let review of campground.reviews) { %>
+                <div class="bg-gray-900 p-6 rounded-2xl border border-gray-800">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center">
+                            <i class="fas fa-user text-gray-400"></i>
+                        </div>
+                        <div>
+                            <p class="font-medium text-gray-200">Anonymous Camper</p>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                <% for(let i=0; i<review.rating; i++) { %>
+                                    <i class="fas fa-star"></i>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-gray-400"><%= review.body %></p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Simplified Rating System
+    document.querySelectorAll('.rating-star').forEach(star => {
+        star.addEventListener('click', function() {
+            const rating = parseInt(this.dataset.value);
+            const stars = document.querySelectorAll('.rating-star');
+            
+            stars.forEach((star, index) => {
+                star.querySelector('i').className = index < rating ? 'fas fa-star' : 'far fa-star';
             });
+            
+            document.getElementById('rating-value').value = rating;
+        });
+    });
 
-            inputs.forEach(input => {
-                input.addEventListener('input', function () {
-                    const errorMessage = input.nextElementSibling;
-
-                    if (input.value.trim()) {
-                        input.classList.remove('border-red-500', 'focus:ring-red-500');
-                        input.classList.add('border-green-500', 'focus:ring-green-500');
-                        errorMessage.classList.add('hidden');
-                    } else {
-                        input.classList.remove('border-green-500', 'focus:ring-green-500');
-                        input.classList.add('border-red-500', 'focus:ring-red-500');
-                        errorMessage.classList.remove('hidden');
-                    }
-                });
-            });
-
-        })();
-    </script>
+    // Basic Form Validation
+    document.getElementById('review-form').addEventListener('submit', function(e) {
+        if(!document.getElementById('rating-value').value) {
+            e.preventDefault();
+            alert('Please select a rating');
+        }
+    });
+</script>
