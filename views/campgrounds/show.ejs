@@ -1,6 +1,6 @@
 <%- layout('layouts/boilerplate') %>
 
-<div class="container mx-auto px-4 py-12">
+<div class="container  mx-auto px-4 py-12">
     <!-- Main Header -->
     <div class="mb-8 border-b border-gray-800 pb-8">
         <h1 class="text-3xl font-bold font-serif text-blue-400 mb-4"><%= campground.title %></h1>
@@ -156,14 +156,14 @@
                 </div>
 
                 <div class="flex justify-between">
-                    <div class="ml-14 flex-1 break-words overflow-hidden ">
+                    <div class="ml-14 mr-2 flex-1 break-words overflow-hidden ">
                         <p class="text-gray-400"><%= review.body %></p>
                     </div>
 
                     <div>
-                        <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?method=DELETE" method="POST">
-                            <button class="btn btn-sm bg-red-800 hover:bg-red-700 text-red-100 px-4 py-2 rounded-lg transition-colors">
-                                <i class="fas fa-trash"></i> Delete
+<form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                            <button class="btn cursor-pointer btn-sm bg-red-800 hover:bg-red-700 text-red-100 px-4 py-1 rounded-lg transition-colors">
+                                <i class="fas fa-trash text-sm"></i> <span class="text-sm"> Delete</span> 
                             </button>
                         </form>
                     </div>
