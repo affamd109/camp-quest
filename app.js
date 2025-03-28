@@ -11,8 +11,8 @@ const Campground = require('./models/campground');
 const Review = require('./models/review');
 const methodOverride = require('method-override');
 
-const campgrounds = require('./routes/campgrounds.js');
-const reviews = require('./routes/reviews');
+const campRoutes = require('./routes/campRoutes.js');
+const reviewRoutes = require('./routes/reviewRoutes.js');
 
 mongoose.connect('mongodb://127.0.0.1:27017/campquest');
 
@@ -60,8 +60,8 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.use('/campgrounds' , campgrounds);
-app.use('/campgrounds/:id/reviews' ,reviews );
+app.use('/campgrounds' , campRoutes);
+app.use('/campgrounds/:id/reviews' ,reviewRoutes );
 
 app.post('/campgrounds/:id/reviews', validateReview , catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);

@@ -1,10 +1,10 @@
 const express = require('express');
 const router = express.Router({mergeParams : true});
-const Campground = require('../models/campground');
-const ExpressError = require('../utils/ExpressError');
-const catchAsync = require('../utils/catchAsync');
+const Campground = require('../models/campground.js');
+const ExpressError = require('../utils/ExpressError.js');
+const catchAsync = require('../utils/catchAsync.js');
 const { campgroundSchema, reviewSchema } = require('../schemas.js');
-const Review = require('../models/review');
+const Review = require('../models/review.js');
 
 const validateReview = (req, res, next) => {
     const { error } = reviewSchema.validate(req.body);
