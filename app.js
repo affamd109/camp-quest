@@ -11,6 +11,8 @@ const Campground = require('./models/campground');
 const Review = require('./models/review');
 const methodOverride = require('method-override');
 
+const campgrounds = require('./routes/campgrounds.js');
+
 mongoose.connect('mongodb://127.0.0.1:27017/campquest');
 
 const db = mongoose.connection;
@@ -57,56 +59,7 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.get('/campgrounds', catchAsync(async (req, res) => {
-    const campgrounds = await Campground.find({});
-    res.render('campgrounds/index', { campgrounds });
-}))
-
-app.get('/campgrounds/new', (req, res) => {
-    res.render('campgrounds/new');
-
-})
-
-app.get('/campgrounds/:id', catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const campground = await Campground.findById(id).populate('reviews');
-    res.render('campgrounds/show', { campground });
-}))
-
-app.post('/campgrounds', validateCampground,
-    catchAsync(async (req, res, next) => {
-        //We r typing req.body.campground cuz , we get the req.body with the object's name as "campground"
-        //U can verify this by typing res.send(req.body)
-
-
-        const campground = new Campground(req.body.campground);
-        await campground.save();
-        res.redirect(`/campgrounds/${campground._id}`);
-        // res.send(req.body)
-
-    }))
-
-app.get('/campgrounds/:id/edit', catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const campground = await Campground.findById(id);
-    res.render('campgrounds/edit', { campground });
-
-}))
-
-//Updating :
-app.put('/campgrounds/:id', validateCampground, catchAsync(async (req, res) => {
-        const { id } = req.params;
-        const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
-        res.redirect(`/campgrounds/${campground._id}`);
-
-    }))
-
-app.delete('/campgrounds/:id', catchAsync(async (req, res) => {
-    const { id } = req.params;
-    const campground = await Campground.findByIdAndDelete(id);
-    res.redirect('/campgrounds');
-
-}))
+app.use('/campgrounds' , campgrounds);
 
 app.post('/campgrounds/:id/reviews', validateReview , catchAsync(async (req, res) => {
     const campground = await Campground.findById(req.params.id);
