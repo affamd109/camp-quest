@@ -44,6 +44,7 @@ router.post('/', validateCampground,
 
         const campground = new Campground(req.body.campground);
         await campground.save();
+        req.flash('success' , 'Successfully made a campground');
         res.redirect(`/campgrounds/${campground._id}`);
         // res.send(req.body)
 
