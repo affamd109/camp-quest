@@ -10,6 +10,9 @@ const { campgroundSchema, reviewSchema } = require('./schemas.js');
 const Campground = require('./models/campground');
 const Review = require('./models/review');
 const methodOverride = require('method-override');
+const session = require('express-session');
+
+
 
 const campRoutes = require('./routes/campRoutes.js');
 const reviewRoutes = require('./routes/reviewRoutes.js');
