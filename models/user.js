@@ -11,7 +11,7 @@ const UserSchema = new Schema({
 });
 
 //yes i only need to write meail cuz of the below plugin
-//The below plugin is used to give fileds like username and passport by  default!
+//The below plugin is used to give fiels like username and passport by  default!
 //Passport-local
 UserSchema.plugin(passportLocalMongoose);
 
