@@ -4,6 +4,7 @@ const Campground = require('../models/campground.js');
 const ExpressError = require('../utils/ExpressError.js');
 const catchAsync = require('../utils/catchAsync.js');
 const { campgroundSchema, reviewSchema } = require('../schemas.js');
+const {isLoggedIn} = require('../middleware');
 
 
 const validateCampground = (req, res, next) => {
@@ -25,7 +26,7 @@ router.get('/', catchAsync(async (req, res) => {
     res.render('campgrounds/index', { campgrounds });
 }))
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
     res.render('campgrounds/new');
 
 })
@@ -41,8 +42,7 @@ router.get('/:id', catchAsync(async (req, res) => {
     res.render('campgrounds/show', { campground });
 }))
 
-router.post('/', validateCampground,
-    catchAsync(async (req, res, next) => {
+router.post('/', isLoggedIn ,  validateCampground, catchAsync(async (req, res, next) => {
         //We r typing req.body.campground cuz , we get the req.body with the object's name as "campground"
         //U can verify this by typing res.send(req.body)
 
@@ -55,7 +55,7 @@ router.post('/', validateCampground,
 
     }))
 
-router.get('/:id/edit', catchAsync(async (req, res) => {
+router.get('/:id/edit',isLoggedIn, catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findById(id);
     if(!campground){
