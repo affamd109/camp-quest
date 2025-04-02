@@ -516,6 +516,9 @@
   .ml-16 {
     margin-left: calc(var(--spacing) * 16);
   }
+  .ml-auto {
+    margin-left: auto;
+  }
   .box-border {
     box-sizing: border-box;
   }
