@@ -14,7 +14,7 @@
         </div>
 
         <ul class="flex space-x-8">
-            <li>
+            <li>1
                 <a href="/" class="relative inline-block group">
                     <span class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
                     <span class="relative group-hover:text-emerald-500 transition-colors duration-300">Home</span>
@@ -36,23 +36,31 @@
     </div>
 
     <ul class="flex space-x-6">
-        <li>
-            <a href="/login" class="relative inline-block group">
-                <span class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
-                <span class="relative group-hover:text-emerald-500 transition-colors duration-300">Login</span>
-            </a>
-        </li>
-        <li>
-            <a href="/register" class="relative inline-block group">
-                <span class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
-                <span class="relative group-hover:text-emerald-500 transition-colors duration-300">Sign Up</span>
-            </a>
-        </li>
-        <li>
-            <a href="/logout" class="relative inline-block group">
-                <span class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
-                <span class="relative group-hover:text-emerald-500 transition-colors duration-300">Logout</span>
-            </a>
-        </li>
+        <% if(!currentUser){ %>
+            <li>
+                <a href="/login" class="relative inline-block group">
+                    <span class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
+                    <span class="relative group-hover:text-emerald-500 transition-colors duration-300">Login</span>
+                </a>
+            </li>
+            
+            <li>
+                <a href="/register" class="relative inline-block group">
+                    <span class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
+                    <span class="relative group-hover:text-emerald-500 transition-colors duration-300">Sign Up</span>
+                </a>
+            </li>
+
+         <%  } else{%>
+            <li>
+                <a href="/logout" class="relative inline-block group">
+                    <span class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out"></span>
+                    <span class="relative group-hover:text-emerald-500 transition-colors duration-300">Logout</span>
+                </a>
+            </li>
+
+            <% } %>
+      
+      
     </ul>
 </nav>
