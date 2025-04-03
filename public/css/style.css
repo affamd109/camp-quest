@@ -15,6 +15,7 @@
     --color-orange-400: oklch(0.75 0.183 55.934);
     --color-amber-300: oklch(0.879 0.169 91.605);
     --color-amber-400: oklch(0.828 0.189 84.429);
+    --color-yellow-300: oklch(0.905 0.182 98.111);
     --color-green-50: oklch(0.982 0.018 155.826);
     --color-green-400: oklch(0.792 0.209 151.711);
     --color-green-500: oklch(0.723 0.219 149.579);
@@ -924,6 +925,9 @@
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .grid-cols-7 {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
   .grid-cols-none {
     grid-template-columns: none;
   }
@@ -1403,6 +1407,9 @@
   .border-red-500 {
     border-color: var(--color-red-500);
   }
+  .border-b-gray-800 {
+    border-bottom-color: var(--color-gray-800);
+  }
   .bg-\(--my_variable\) {
     background-color: var(--my_variable);
   }
@@ -1675,6 +1682,9 @@
   .object-top {
     object-position: top;
   }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+  }
   .p-2 {
     padding: calc(var(--spacing) * 2);
   }
@@ -1723,6 +1733,9 @@
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
   }
+  .pt-4 {
+    padding-top: calc(var(--spacing) * 4);
+  }
   .pt-6 {
     padding-top: calc(var(--spacing) * 6);
   }
@@ -1731,6 +1744,15 @@
   }
   .pb-1 {
     padding-bottom: calc(var(--spacing) * 1);
+  }
+  .pb-2 {
+    padding-bottom: calc(var(--spacing) * 2);
+  }
+  .pb-3 {
+    padding-bottom: calc(var(--spacing) * 3);
+  }
+  .pb-4 {
+    padding-bottom: calc(var(--spacing) * 4);
   }
   .pb-6 {
     padding-bottom: calc(var(--spacing) * 6);
@@ -1984,6 +2006,9 @@
   .text-white {
     color: var(--color-white);
   }
+  .text-yellow-300 {
+    color: var(--color-yellow-300);
+  }
   .capitalize {
     text-transform: capitalize;
   }
@@ -2157,6 +2182,10 @@
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
+  .shadow-lg {
+    --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
   .shadow-md {
     --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
@@ -2176,6 +2205,9 @@
   .inset-ring {
     --tw-inset-ring-shadow: inset 0 0 0 1px var(--tw-inset-ring-color, currentColor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .shadow-blue-500\/20 {
+    --tw-shadow-color: color-mix(in oklab, var(--color-blue-500) 20%, transparent);
   }
   .shadow-initial {
     --tw-shadow-color: initial;
@@ -2537,6 +2569,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: var(--color-gray-700);
+      }
+    }
+  }
+  .hover\:bg-gray-800 {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--color-gray-800);
       }
     }
   }

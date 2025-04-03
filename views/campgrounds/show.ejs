@@ -171,7 +171,63 @@
                     <i class="fas fa-wifi text-blue-400"></i> <span>Limited WiFi</span>
                 </div>
             </div>
-            
+
+            <!-- weather widget -->
+
+            <div class="mt-6 pt-4 border-t border-gray-800 pb-2">
+                <h4 class="font-medium mb-3 flex items-center gap-2">
+                    <i class="fas fa-cloud-sun text-blue-400"></i>
+                    Current Conditions
+                </h4>
+                <div class="flex items-center justify-between text-sm">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-temperature-high text-amber-400 text-lg"></i>
+                        <div>
+                            <div class="text-gray-200">24°C / 75°F</div>
+                            <div class="text-gray-400 text-xs">Daytime High</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-temperature-low text-blue-400 text-lg"></i>
+                        <div>
+                            <div class="text-gray-200">12°C / 54°F</div>
+                            <div class="text-gray-400 text-xs">Nighttime Low</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 text-sm text-gray-400 flex items-center gap-2">
+                    <i class="fas fa-wind text-gray-400"></i>
+                    <span>Light breeze, 8 km/h</span>
+                </div>
+            </div>
+
+
+            <!-- Safety Info -->
+            <div class="mt-6 pt-6 border-t  border-gray-800">
+                <h4 class="font-medium mb-3 flex items-center gap-2">
+                    <i class="fas fa-shield-alt text-blue-400"></i>
+                    Safety & Property
+                </h4>
+                <div class="space-y-2 text-sm text-gray-400">
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                        <span>Carbon monoxide alarms</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                        <span>Smoke detectors</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                        <span>First aid kits</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                        <span>Fire extinguishers</span>
+                    </div>
+                </div>
+            </div>
+
             <% if(currentUser && campground.author.equals(currentUser)){ %>
 
                 <div class="border-t border-gray-800 pt-6 space-y-4">
@@ -189,20 +245,6 @@
                 </div>
 
                 <% } %>
-
-
-            <!-- Safety Info -->
-            <div class="mt-6 pt-6 border-t border-gray-800">
-                <h4 class="font-medium mb-3 flex items-center gap-2">
-                    <i class="fas fa-shield-alt text-blue-400"></i>
-                    Safety & Property
-                </h4>
-                <p class="text-sm text-gray-400">
-                    Carbon monoxide alarm · Smoke alarm · First aid kit · Fire extinguisher
-                </p>
-            </div>
-
-            
 
 
         </div>
@@ -415,3 +457,4 @@
         }
     });
 </script>
+

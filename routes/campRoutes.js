@@ -4,7 +4,7 @@ const Campground = require('../models/campground.js');
 const ExpressError = require('../utils/ExpressError.js');
 const catchAsync = require('../utils/catchAsync.js');
 const {isLoggedIn , isAuthor , validateCampground} = require('../middleware');
-const { campgroundSchema, reviewSchema } = require('../schemas.js');
+// const { campgroundSchema, reviewSchema } = require('../schemas.js');
 
 
 
