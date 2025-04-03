@@ -343,12 +343,11 @@
                             <i class="fas fa-user text-gray-400 text-xl"></i>
                         </div>
                         <div class="flex-1">
-                            <p class="font-medium mb-1 text-gray-200">Anonymous Camper</p>
+                            <p class="font-medium mb-1 text-gray-200"><%= review.author.username %></p>
                             <div class="flex items-center gap-1 text-amber-400 text-sm">
                                 <% for(let i=0; i<review.rating; i++) { %>
                                     <i class="fas fa-star"></i>
                                 <% } %>
-                                <span class="text-gray-500 ml-2">2 weeks ago</span>
                             </div>
                         </div>
                     </div>
@@ -359,16 +358,18 @@
                         </div>
 
                         <div>
-                            <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                                <button class="btn cursor-pointer btn-sm bg-red-800 hover:bg-red-700 text-red-100 px-4 py-1 rounded-lg transition-colors">
-                                    <i class="fas fa-trash text-sm"></i> <span class="text-sm"> Delete</span> 
-                                </button>
-                            </form>
+                            <% if(currentUser && review.author.equals(currentUser)){ %>
+                                <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                                    <button class="btn cursor-pointer btn-sm bg-red-800 hover:bg-red-700 text-red-100 px-4 py-1 rounded-lg transition-colors">
+                                        <i class="fas fa-trash text-sm"></i> <span class="text-sm"> Delete</span> 
+                                    </button>
+                                </form>
+                                <% } %>
                         </div>
                     </div>
                     
                     <!-- Review Reactions -->
-                    <div class="mt-4 ml-16 flex items-center gap-4 text-sm text-gray-500">
+                    <!-- <div class="mt-4 ml-16 flex items-center gap-4 text-sm text-gray-500">
                         <button class="hover:text-blue-400 transition-colors flex items-center gap-1">
                             <i class="far fa-thumbs-up"></i> 12
                         </button>
@@ -378,7 +379,7 @@
                         <button class="hover:text-blue-400 transition-colors flex items-center gap-1">
                             <i class="fas fa-share"></i> Share
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             <% } %>
         </div>
