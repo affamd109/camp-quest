@@ -3,22 +3,10 @@ const router = express.Router();
 const Campground = require('../models/campground.js');
 const ExpressError = require('../utils/ExpressError.js');
 const catchAsync = require('../utils/catchAsync.js');
+const {isLoggedIn , isAuthor , validateCampground} = require('../middleware');
 const { campgroundSchema, reviewSchema } = require('../schemas.js');
-const {isLoggedIn} = require('../middleware');
 
 
-const validateCampground = (req, res, next) => {
-
-    const { error } = campgroundSchema.validate(req.body);
-
-    if (error) {
-        const msg = error.details.map(el => el.message).join(',');
-        throw new ExpressError(msg, 400);
-    }
-    else {
-        next();
-    }
-}
 
 
 router.get('/', catchAsync(async (req, res) => {
@@ -56,19 +44,20 @@ router.post('/', isLoggedIn ,  validateCampground, catchAsync(async (req, res, n
 
     }))
 
-router.get('/:id/edit',isLoggedIn, catchAsync(async (req, res) => {
+router.get('/:id/edit',isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findById(id);
     if(!campground){
         req.flash('error' , 'Campground does not exist');
         return res.redirect('/campgrounds');
     }
+   
     res.render('campgrounds/edit', { campground });
 
 }))
 
 //Updating :
-router.put('/:id', validateCampground, catchAsync(async (req, res) => {
+router.put('/:id', validateCampground, isAuthor, catchAsync(async (req, res) => {
         const { id } = req.params;
         const campground = await Campground.findByIdAndUpdate(id, { ...req.body.campground });
         req.flash('success' , 'Campground updated successfully')
@@ -76,7 +65,7 @@ router.put('/:id', validateCampground, catchAsync(async (req, res) => {
 
     }))
 
-router.delete('/:id', catchAsync(async (req, res) => {
+router.delete('/:id', isAuthor ,  catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findByIdAndDelete(id);
     req.flash('success' , 'Campground deleted successfully')
