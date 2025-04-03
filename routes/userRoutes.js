@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/user');
 const catchAsync = require('../utils/catchAsync');
 const passport = require('passport');
+const { storeReturnTo } = require('../middleware');
 
 
 router.get('/register' , (req , res) =>{
@@ -28,10 +29,12 @@ router.post('/register' , catchAsync(async (req , res) =>{
 }));
 
 router.get('/login' , (req , res) =>{
+    console.log(req.session);
     res.render('users/login');
 })
 
-router.post('/login', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+router.post('/login',storeReturnTo ,passport.authenticate('local', { failureFlash: true, failureRedirect: '/login' }), (req, res) => {
+    
     req.flash('success', 'Welcome Back!');
     const redirectUrl = req.session.returnTo || '/campgrounds';
     delete req.session.returnTo;
