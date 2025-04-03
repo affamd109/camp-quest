@@ -171,20 +171,25 @@
                     <i class="fas fa-wifi text-blue-400"></i> <span>Limited WiFi</span>
                 </div>
             </div>
+            
+            <% if(currentUser && campground.author.equals(currentUser)){ %>
 
-            <div class="border-t border-gray-800 pt-6 space-y-4">
-                <a href="/campgrounds/<%=campground._id%>/edit"
-                   class="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-gray-300 transition-colors">
-                    <i class="fas fa-edit"></i>
-                    Edit Campground
-                </a>
-                <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
-                    <button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-800 hover:bg-red-700 rounded-xl text-red-100 transition-colors">
-                        <i class="fas fa-trash"></i>
-                        Delete Campground
-                    </button>
-                </form>
-            </div>
+                <div class="border-t border-gray-800 pt-6 space-y-4">
+                    <a href="/campgrounds/<%=campground._id%>/edit"
+                       class="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-gray-300 transition-colors">
+                        <i class="fas fa-edit"></i>
+                        Edit Campground
+                    </a>
+                    <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                        <button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-800 hover:bg-red-700 rounded-xl text-red-100 transition-colors">
+                            <i class="fas fa-trash"></i>
+                            Delete Campground
+                        </button>
+                    </form>
+                </div>
+
+                <% } %>
+
 
             <!-- Safety Info -->
             <div class="mt-6 pt-6 border-t border-gray-800">

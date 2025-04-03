@@ -33,7 +33,8 @@ router.get('/new', isLoggedIn, (req, res) => {
 
 router.get('/:id', catchAsync(async (req, res) => {
     const { id } = req.params;
-    const campground = await Campground.findById(id).populate('reviews');
+    const campground = await Campground.findById(id).populate('reviews').populate('author');
+    console.log(`Here is your campground: ${campground}`);
 
     if(!campground){
         req.flash('error' , 'Campground does not exist');
@@ -46,8 +47,8 @@ router.post('/', isLoggedIn ,  validateCampground, catchAsync(async (req, res, n
         //We r typing req.body.campground cuz , we get the req.body with the object's name as "campground"
         //U can verify this by typing res.send(req.body)
 
-
         const campground = new Campground(req.body.campground);
+        campground.author = req.user._id;
         await campground.save();
         req.flash('success' , 'Successfully made a campground');
         res.redirect(`/campgrounds/${campground._id}`);
