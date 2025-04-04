@@ -26,18 +26,27 @@
         <!-- Left Column -->
         <div class="lg:col-span-2 space-y-8">
             <!-- Image Gallery -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="col-span-2 overflow-hidden border border-gray-800 ">
-                    <img src="<%= campground.image %>" alt="<%= campground.title %>" 
-                         class="w-full h-96 object-cover hover:brightness-110 transition-all duration-300">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <!-- Top Row -->
+                <div class="md:col-span-2 overflow-hidden border border-gray-800">
+                    <img src="<%= campground.image %>" alt="<%= campground.title %>"
+                         class="w-full h-60 md:h-72 object-cover hover:brightness-110 transition-all duration-300">
                 </div>
                 <div class="overflow-hidden border border-gray-800">
-                    <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
-                         class="w-full h-44 object-cover hover:scale-105 transition-all duration-500">
+                    <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                         class="w-full h-60 md:h-72 object-cover hover:scale-105 transition-transform duration-500">
                 </div>
-                <div class="overflow-hidden border border-gray-800 ">
-                    <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
-                         class="w-full h-44 object-cover hover:scale-105 transition-all duration-500">
+            
+                <!-- Bottom Row (full width across all columns) -->
+                <div class="md:col-span-3 grid grid-cols-2 space-x-6">
+                    <div class="overflow-hidden border border-gray-800">
+                        <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                             class="w-full h-44 object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="overflow-hidden border border-gray-800">
+                        <img src="https://images.unsplash.com/photo-1505741263612-3ee2cce6dc17?q=80&w=1638&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                             class="w-full h-44 object-cover hover:scale-105 transition-transform duration-500">
+                    </div>
                 </div>
             </div>
 
@@ -154,7 +163,7 @@
                 </button>
             </div> -->
             
-            <div class="space-y-3 mt-4 p-3 pl-5 rounded-xl border border-gray-800  text-gray-300">
+            <div class="space-y-3 mt-4 p-3 pl-5 rounded-xl border border-gray-700  text-gray-300">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-home text-blue-400"></i> <span>Entire campground</span>
                 </div>
@@ -174,7 +183,7 @@
 
             <!-- weather widget -->
 
-            <div class="mt-6 p-4 rounded-xl border border-gray-800 ">
+            <div class="mt-6 p-4 rounded-xl border border-gray-700 ">
                 <h4 class="font-medium mb-3 flex items-center gap-2">
                     <i class="fas fa-cloud-sun text-blue-400"></i>
                     Current Conditions
@@ -203,7 +212,7 @@
 
 
             <!-- Safety Info -->
-            <div class="mt-6 p-4 rounded-xl border border-gray-800">
+            <div class="mt-6 p-4 rounded-xl border border-gray-700">
                 <h4 class="font-medium mb-3 flex items-center gap-2">
                     <i class="fas fa-shield-alt text-blue-400"></i>
                     Safety & Property
