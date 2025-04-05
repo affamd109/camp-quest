@@ -4,7 +4,8 @@ const campgrounds = require('../controllers/campgrounds');
 const catchAsync = require('../utils/catchAsync');
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
 const multer = require('multer');
-const upload = multer({dest : 'uploads/'});
+const {storage} = require('../cloudinary/index')
+const upload = multer({storage}); //This tells us to upload img in the storage we have made using cloudinary 
 
 
 const Campground = require('../models/campground');
