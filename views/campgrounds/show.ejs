@@ -23,15 +23,39 @@
 
     <!-- Main Content -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Left Column -->
+    <!-- Left Column -->
         <div class="lg:col-span-2 space-y-8">
-            <!-- Image Gallery -->
+  <!-- Image Gallery -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <!-- Top Row -->
-                <div class="md:col-span-2 overflow-hidden border border-gray-800">
-                    <img src="<%= campground.image %>" alt="<%= campground.title %>"
-                         class="w-full h-60 md:h-72 object-cover hover:brightness-110 transition-all duration-300">
+                 
+                <div class="md:col-span-2 overflow-hidden border border-gray-800 relative">
+                    <div id="campgroundCarousel" class="relative w-full h-60 md:h-72">
+                        <div class="relative h-full overflow-hidden rounded-lg">
+                            <% campground.images.forEach((img, i) => { %>
+                                <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out <%= i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' %>">
+                                    <img src="<%= img.url %>" alt="Camp Image"
+                                         class="w-full h-full object-cover">
+                                </div>
+                            <% }) %>
+                        </div>
+                
+                        <% if (campground.images.length > 1) { %>
+                        <!-- Previous Button -->
+                        <button id="prevBtn" type="button"
+                            class="absolute top-1/2 left-2 z-20 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full">
+                            &#10094;
+                        </button>
+                
+                        <!-- Next Button -->
+                        <button id="nextBtn" type="button"
+                            class="absolute top-1/2 right-2 z-20 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full">
+                            &#10095;
+                        </button>
+                        <% } %>
+                    </div>
                 </div>
+
                 <div class="overflow-hidden border border-gray-800">
                     <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                          class="w-full h-60 md:h-72 object-cover hover:scale-105 transition-transform duration-500">
@@ -464,6 +488,37 @@
             e.preventDefault();
             textarea.classList.add('border-red-500');
             textarea.focus();
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const items = document.querySelectorAll('#campgroundCarousel .carousel-item');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        let current = 0;
+
+        function showSlide(index) {
+            items.forEach((item, i) => {
+                if (i === index) {
+                    item.classList.add('opacity-100', 'z-10');
+                    item.classList.remove('opacity-0', 'z-0');
+                } else {
+                    item.classList.remove('opacity-100', 'z-10');
+                    item.classList.add('opacity-0', 'z-0');
+                }
+            });
+        }
+
+        if (nextBtn && prevBtn) {
+            nextBtn.addEventListener('click', () => {
+                current = (current + 1) % items.length;
+                showSlide(current);
+            });
+
+            prevBtn.addEventListener('click', () => {
+                current = (current - 1 + items.length) % items.length;
+                showSlide(current);
+            });
         }
     });
 </script>
