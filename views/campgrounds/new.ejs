@@ -31,12 +31,34 @@
                     id="description" name="campground[description]" required></textarea>
                 <p class="hidden text-red-500 text-sm mt-1">Description is required.</p>
             </div>
-            <div>
+
+
+            <!-- <div>
                 <label class="block text-sm font-medium text-gray-700" for="image">Upload Images</label>
                 <input type="file" id="image" name="image" multiple
                     class="block w-full text-sm text-gray-700 border border-gray-300 rounded-md cursor-pointer bg-white focus:outline-none font-serif">
                 <p class="text-xs text-gray-500 mt-1 font-serif">You can upload multiple images.</p>
+            </div> -->
+
+            <div>
+                <label class="block text-sm font-medium text-gray-700" for="image">Upload Images</label>
+                <div class="mt-1 flex justify-center h-28 px-6 pt-2 pb-6 border-2 border-gray-300 border-dashed rounded-md">
+                    <div class="space-y-1 text-center">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mx-auto mb-0.5"></i>
+                        <div class="flex text-sm text-gray-600 justify-center">
+                            <label for="image" class="relative cursor-pointer font-medium text-blue-600 hover:text-blue-500">
+                                <span>Upload files</span>
+                                <input id="image" name="image" type="file" multiple class="sr-only">
+                                <p id="file-chosen" class="text-xs text-gray-500 mt-0.5 text-center">No files selected</p>
+                            </label>
+                        </div>
+                        <p class="text-xs pb-4 text-gray-500">JPEG, JPG, PNG </p>
+                    </div>
+                </div>
             </div>
+
+
+            
             <div>
                 <button
                     class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600 transition cursor-pointer font-serif">Add
@@ -48,3 +70,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    const input = document.getElementById('image');
+    const fileChosen = document.getElementById('file-chosen');
+
+    input.addEventListener('change', () => {
+        const count = input.files.length;
+        if (count === 0) {
+            fileChosen.textContent = 'No files selected';
+        } else {
+            fileChosen.textContent = `${count} files selected`;
+        }
+    });
+</script>

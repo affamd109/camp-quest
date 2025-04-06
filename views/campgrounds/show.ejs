@@ -484,11 +484,7 @@
             starsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
         
-        if(textarea.value.trim().length < 10) {
-            e.preventDefault();
-            textarea.classList.add('border-red-500');
-            textarea.focus();
-        }
+    
     });
 
     document.addEventListener('DOMContentLoaded', () => {

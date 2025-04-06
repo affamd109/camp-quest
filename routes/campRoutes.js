@@ -18,9 +18,17 @@ router.get('/new', isLoggedIn, campgrounds.renderNewForm)
 
 router.route('/:id')
     .get(catchAsync(campgrounds.showCampground))
-    .put(isLoggedIn, isAuthor, validateCampground, catchAsync(campgrounds.updateCampground))
+    .put(isLoggedIn, isAuthor, upload.array('image'), validateCampground, catchAsync(campgrounds.updateCampground))
     .delete(isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground));
 
-router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm))
+router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));
+
+// router.delete('/:id/images/:filename', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
+//     const { id, filename } = req.params;
+//     await Campground.findByIdAndUpdate(id, { $pull: { images: { filename } } });
+//     // Optionally delete from Cloudinary too:
+//     // await cloudinary.uploader.destroy(filename);
+//     // res.status(200).json({ success: true });
+// }) );
 
 module.exports = router;
