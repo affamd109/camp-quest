@@ -59,9 +59,6 @@ module.exports.updateCampground = async (req, res) => {
         await campground.updateOne({ $pull : { images : { filename : { $in: req.body.deleteImages}}}});
     }
 
-
-
-    
     console.log( 'after : ' , campground);
 
 
