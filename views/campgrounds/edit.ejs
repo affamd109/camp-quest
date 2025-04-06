@@ -48,24 +48,26 @@
                 </div>
             </div>
 
-            <!-- <% if (campground.images && campground.images.length > 0) { %>
+            <% if (campground.images && campground.images.length > 0) { %>
                 <div class="mt-4">
                     <p class="text-sm font-medium text-gray-700 mb-2">Current Images:</p>
                     <div class="grid grid-cols-3 gap-2">
-                        <% campground.images.forEach(image => { %>
+                        <% campground.images.forEach(function(img, i) { %>
                             <div class="relative group">
-                                <img src="<%= image.url %>" alt="Campground image" class="h-24 w-full object-cover rounded-md">
+                                <img src="<%= img.url %>" alt="Campground image" class="h-24 w-full object-cover rounded-md">
                                 <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity rounded-md">
-                                    <button type="button" class="text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded text-xs" 
-                                        onclick="deleteImage('<%= image.filename %>', '<%= campground._id %>')">
-                                        Delete
-                                    </button>
+                                    <div class="form-check">
+                                        <input type="checkbox" id="image-<%=i%>" name="deleteImages[]" value="<%=img.filename%>" >
+                                        <!-- <label for="image-<%=i%>" class="text-white bg-red-500 hover:bg-red-600 px-2 py-1 rounded text-xs cursor-pointer">
+                                            Delete
+                                        </label> -->
+                                    </div>
                                 </div>
                             </div>
                         <% }); %>
                     </div>
                 </div>
-            <% } %> -->
+            <% } %>
 
             
             <div>
@@ -161,6 +163,8 @@
     //         });
     //     }
     // }
+
+
 
   
 </script>
