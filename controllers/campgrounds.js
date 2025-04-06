@@ -51,7 +51,7 @@ module.exports.updateCampground = async (req, res) => {
     await campground.save();
 
     if(req.body.deleteImages){
-        await campground.updateOne({ $pull : { images : { filename : { $id: req.body.deleteImages}}}});
+        await campground.updateOne({ $pull : { images : { filename : { $in: req.body.deleteImages}}}});
     }
 
     console.log( 'after : ' , campground);
