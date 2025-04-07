@@ -1,4 +1,4 @@
-# CampQuest �️  
+# CampQuest
 *CampQuest is a full-stack web application where users can discover, review, and manage campgrounds. This project focuses on the backend architecture
  while also delivering a smooth frontend experience.*  
 
