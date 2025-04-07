@@ -10,14 +10,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
 
-<body class="text-white bg-black flex flex-col min-h-screen">
+<body class="text-white bg-black flex flex-col min-h-screen flex-grow  ">
     <%- include('../partials/navbar') %>
 
     <!-- Main content should grow to push the footer down -->
-    <main class="flex-grow container mx-auto">
+
         <%- include('../partials/flash') %> 
         <%- body %>
-    </main>
+
 
     <%- include('../partials/footer') %>
 
