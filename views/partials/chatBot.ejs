@@ -1,0 +1,79 @@
+<!-- Chatbot Button & Container (Tailwind + Dark Mode) -->
+<div class="fixed bottom-6 right-6 z-50">
+    <button id="chatbot-toggle" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition">
+      <i class="fas fa-robot"></i> <!-- Uses Font Awesome from your CDN -->
+    </button>
+    
+    <div id="chatbot-container" class="hidden bg-gray-800 rounded-lg shadow-xl w-80 h-96 flex flex-col border border-gray-700 mt-2">
+      <div class="p-4 border-b border-gray-700 bg-blue-600 text-white rounded-t-lg">
+        <h3 class="font-bold">CampQuest AI</h3>
+      </div>
+      <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto text-gray-200"></div>
+      <div class="p-4 border-t border-gray-700">
+        <input 
+          type="text" 
+          id="chatbot-input" 
+          placeholder="Ask about camping..." 
+          class="w-full px-3 py-2 bg-gray-700 text-white border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+        <button id="chatbot-send" class="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg w-full">
+          Send <i class="fas fa-paper-plane ml-1"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Chatbot JavaScript -->
+  <script>
+    // Toggle Chatbot Visibility
+    document.getElementById('chatbot-toggle').addEventListener('click', () => {
+      document.getElementById('chatbot-container').classList.toggle('hidden');
+    });
+  
+    // Send Message to Backend
+    document.getElementById('chatbot-send').addEventListener('click', async () => {
+      const input = document.getElementById('chatbot-input');
+      const messagesDiv = document.getElementById('chatbot-messages');
+      const userMessage = input.value.trim();
+  
+      if (!userMessage) return;
+  
+      // Add user message to chat
+      messagesDiv.innerHTML += `
+        <div class="mb-4 text-right">
+          <div class="inline-block bg-blue-100 text-blue-900 px-4 py-2 rounded-lg max-w-xs">
+            ${userMessage}
+          </div>
+        </div>
+      `;
+      input.value = '';
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  
+      // Fetch AI response
+      try {
+        const response = await fetch('/chatbot', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message: userMessage })
+        });
+        const data = await response.json();
+  
+        // Add bot response
+        messagesDiv.innerHTML += `
+          <div class="mb-4">
+            <div class="inline-block bg-gray-700 text-gray-200 px-4 py-2 rounded-lg max-w-xs">
+              ${data.reply}
+            </div>
+          </div>
+        `;
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      } catch (err) {
+        console.error('Chatbot error:', err);
+      }
+    });
+  
+    // Send message on Enter key
+    document.getElementById('chatbot-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') document.getElementById('chatbot-send').click();
+    });
+  </script>

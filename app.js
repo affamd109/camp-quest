@@ -2,7 +2,7 @@ if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
 }
 
-console.log(process.env.SECRET);
+// console.log(process.env.SECRET);
 
 const express = require('express');
 const app = express();
@@ -25,6 +25,7 @@ const User = require('./models/user');
 const campRoutes = require('./routes/campRoutes.js');
 const reviewRoutes = require('./routes/reviewRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
+const chatBotRoutes = require('./routes/chatBotRoutes.js');
 
 mongoose.connect('mongodb://127.0.0.1:27017/campquest');
 
@@ -33,6 +34,8 @@ db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
     console.log("Database connected");
 });
+
+// console.log('Key:' , process.env.OPENAI_API_KEY);
 
 
 app.engine('ejs', ejsMate);
@@ -90,6 +93,7 @@ app.get('/fakeUser' , async (req , res) =>{
 app.use('/' , userRoutes);
 app.use('/campgrounds' , campRoutes);
 app.use('/campgrounds/:id/reviews' ,reviewRoutes );
+app.use('/chatbot' , chatBotRoutes);
 
 
 

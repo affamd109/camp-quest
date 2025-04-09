@@ -1,5 +1,11 @@
 
-    (function () {
+
+document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+    if (form) {
+      const inputs = form.querySelectorAll("input, textarea, select");
+
+      (function () {
         'use strict';
 
         const form = document.querySelector('.validated-form');
@@ -46,3 +52,8 @@
         });
 
     })();
+    }
+  });
+
+
+   
