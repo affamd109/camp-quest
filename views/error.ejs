@@ -4,7 +4,10 @@
     <div class="w-1/2">
         <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
             <h4 class="font-bold text-lg"><%= err.message %></h4>
+            <% if(process.env.NODE_ENV !== 'production'){ %>
             <p class="text-sm"><%= err.stack %></p>
+
+            <% } %>
         </div>
     </div>
 </div>

@@ -20,6 +20,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require('helmet');
 
 
 
@@ -54,11 +55,13 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 const sessionConfig = {
+    name : 'session',
     secret : 'thisisasecret',
     resave : false,
     saveUninitialised : true,
     cookie : {
         httpOnly : true,
+        // secure : true,
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
 
