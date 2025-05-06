@@ -19,6 +19,7 @@ const session = require('express-session');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
+const mongoSanitize = require('express-mongo-sanitize');
 
 
 
@@ -42,6 +43,9 @@ app.engine('ejs', ejsMate);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname , 'public')));
 app.use(methodOverride('_method'));
+app.use(mongoSanitize({
+    replaceWith : '_'
+}));
 
 const PORT = process.env.PORT || 3000;
 
@@ -77,6 +81,7 @@ app.use((req , res , next) =>{
     // if(!['/login' , '/' , '/register'].includes(req.originalUrl)){
     //     req.session.returnTo = req.originalUrl;
     // }
+    console.log(req.query);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');

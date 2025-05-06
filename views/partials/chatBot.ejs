@@ -1,4 +1,4 @@
-<!-- Chatbot Button & Container (Tailwind + Dark Mode) -->
+
 <div class="fixed bottom-6 right-6 z-50">
     <button id="chatbot-toggle" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition">
       <i class="fas fa-robot"></i> <!-- Uses Font Awesome from your CDN -->
@@ -7,8 +7,16 @@
     <div id="chatbot-container" class="hidden bg-gray-800 rounded-lg shadow-xl w-80 h-96 flex flex-col border border-gray-700 mt-2">
       <div class="p-4 border-b border-gray-700 bg-blue-600 text-white rounded-t-lg">
         <h3 class="font-bold">CampQuest AI</h3>
+        <p class="text-xs opacity-80">Ask me about camping adventures!</p>
       </div>
-      <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto text-gray-200"></div>
+      <div id="chatbot-messages" class="flex-1 p-4 overflow-y-auto text-gray-200">
+        <!-- Welcome message -->
+        <div class="mb-4">
+          <div class="inline-block bg-gray-700 text-gray-200 px-4 py-2 rounded-lg max-w-xs">
+            Hi! I'm your CampQuest assistant. How can I help with your camping adventure today?
+          </div>
+        </div>
+      </div>
       <div class="p-4 border-t border-gray-700">
         <input 
           type="text" 
@@ -25,9 +33,18 @@
   
   <!-- Chatbot JavaScript -->
   <script>
+    // Generate a unique session ID for each user
+    const chatSessionId = Date.now().toString();
+    
     // Toggle Chatbot Visibility
     document.getElementById('chatbot-toggle').addEventListener('click', () => {
-      document.getElementById('chatbot-container').classList.toggle('hidden');
+      const container = document.getElementById('chatbot-container');
+      container.classList.toggle('hidden');
+      
+      // Auto-focus input when opening
+      if (!container.classList.contains('hidden')) {
+        document.getElementById('chatbot-input').focus();
+      }
     });
   
     // Send Message to Backend
@@ -49,13 +66,38 @@
       input.value = '';
       messagesDiv.scrollTop = messagesDiv.scrollHeight;
   
+      // Show typing indicator
+      const typingIndicator = document.createElement('div');
+      typingIndicator.innerHTML = `
+        <div class="mb-4">
+          <div class="inline-block bg-gray-700 text-gray-200 px-4 py-2 rounded-lg max-w-xs">
+            <div class="flex space-x-1">
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-100"></div>
+              <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce delay-200"></div>
+            </div>
+          </div>
+        </div>
+      `;
+      messagesDiv.appendChild(typingIndicator);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+  
       // Fetch AI response
       try {
         const response = await fetch('/chatbot', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userMessage })
+          body: JSON.stringify({ 
+            message: userMessage,
+            sessionId: chatSessionId
+          })
         });
+        
+        // Remove typing indicator
+        typingIndicator.remove();
+        
+        if (!response.ok) throw new Error('Network response was not ok');
+        
         const data = await response.json();
   
         // Add bot response
@@ -66,14 +108,27 @@
             </div>
           </div>
         `;
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
       } catch (err) {
+        // Remove typing indicator
+        typingIndicator.remove();
+        
         console.error('Chatbot error:', err);
+        messagesDiv.innerHTML += `
+          <div class="mb-4">
+            <div class="inline-block bg-red-700 text-white px-4 py-2 rounded-lg max-w-xs">
+              Sorry, I'm having trouble responding. Please try again.
+            </div>
+          </div>
+        `;
+      } finally {
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
       }
     });
   
     // Send message on Enter key
     document.getElementById('chatbot-input').addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') document.getElementById('chatbot-send').click();
+      if (e.key === 'Enter') {
+        document.getElementById('chatbot-send').click();
+      }
     });
   </script>
