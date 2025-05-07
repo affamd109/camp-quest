@@ -20,6 +20,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const mongoSanitize = require('express-mongo-sanitize');
+const MongoStore = require('connect-mongo');
 
 
 
@@ -28,9 +29,14 @@ const campRoutes = require('./routes/campRoutes.js');
 const reviewRoutes = require('./routes/reviewRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
 const chatBotRoutes = require('./routes/chatBotRoutes.js');
-const { contentSecurityPolicy } = require('helmet');
+// const { contentSecurityPolicy } = require('helmet');
 
-mongoose.connect('mongodb://127.0.0.1:27017/campquest');
+// 'mongodb://127.0.0.1:27017/campquest'
+// const dbURL = process.env.DB_URL
+
+const dbUrl = 'mongodb://127.0.0.1:27017/campquest'
+
+mongoose.connect(dbUrl);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
@@ -38,11 +44,13 @@ db.once("open", () => {
     console.log("Database connected");
 });
 
+
 // console.log('Key:' , process.env.OPENAI_API_KEY);
 
 
 app.engine('ejs', ejsMate);
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname , 'public')));
 app.use(methodOverride('_method'));
 app.use(mongoSanitize({
@@ -55,7 +63,20 @@ const PORT = process.env.PORT || 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisisasecret!'
+    }
+});
+
+store.on("error" , function(e){
+    console.log('session store error !' , e);
+})
+
 const sessionConfig = {
+    store,
     name : 'session',
     secret : 'thisisasecret',
     resave : false,
@@ -86,7 +107,7 @@ app.use((req , res , next) =>{
     // if(!['/login' , '/' , '/register'].includes(req.originalUrl)){
     //     req.session.returnTo = req.originalUrl;
     // }
-    console.log(req.query);
+    // console.log(req.query);
     res.locals.currentUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');

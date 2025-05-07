@@ -1,4 +1,3 @@
-
 <div class="fixed bottom-6 right-6 z-50">
     <button id="chatbot-toggle" class="bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-lg transition">
       <i class="fas fa-robot"></i> <!-- Uses Font Awesome from your CDN -->
@@ -33,9 +32,14 @@
   
   <!-- Chatbot JavaScript -->
   <script>
-    // Generate a unique session ID for each user
-    const chatSessionId = Date.now().toString();
-    
+    // Session Management
+    let chatSessionId = localStorage.getItem('campquest_chat_session');
+    if (!chatSessionId) {
+      // Generate a unique session ID combining timestamp and random string
+      chatSessionId = Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('campquest_chat_session', chatSessionId);
+    }
+
     // Toggle Chatbot Visibility
     document.getElementById('chatbot-toggle').addEventListener('click', () => {
       const container = document.getElementById('chatbot-container');
@@ -86,17 +90,23 @@
       try {
         const response = await fetch('/chatbot', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest' // Useful for Express to identify AJAX
+          },
           body: JSON.stringify({ 
             message: userMessage,
-            sessionId: chatSessionId
+            sessionId: chatSessionId // Include the persistent session ID
           })
         });
         
         // Remove typing indicator
         typingIndicator.remove();
         
-        if (!response.ok) throw new Error('Network response was not ok');
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Network response was not ok');
+        }
         
         const data = await response.json();
   
@@ -116,7 +126,7 @@
         messagesDiv.innerHTML += `
           <div class="mb-4">
             <div class="inline-block bg-red-700 text-white px-4 py-2 rounded-lg max-w-xs">
-              Sorry, I'm having trouble responding. Please try again.
+              ${err.message || 'Sorry, I\'m having trouble responding. Please try again.'}
             </div>
           </div>
         `;
@@ -130,5 +140,11 @@
       if (e.key === 'Enter') {
         document.getElementById('chatbot-send').click();
       }
+    });
+
+    // Optional: Clear chat session when the page is about to be unloaded
+    window.addEventListener('beforeunload', () => {
+      // You might want to keep the session or clear it based on your requirements
+      // localStorage.removeItem('campquest_chat_session'); // Uncomment if you want to clear
     });
   </script>

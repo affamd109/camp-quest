@@ -1,33 +1,70 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const redisClient = require('../utils/redisClient');
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+// Session timeout (24 hours)
+const SESSION_TIMEOUT = 86400; 
+
+
+
 module.exports.getChatbotResponse = async (req, res) => {
-  const { message } = req.body;
+  console.log(req.body);
+  const { message, sessionId } = req.body;
   
   try {
-    // Get the model (gemini-pro for text)
+    // Get or initialize chat history from Redis
+    const historyKey = `chat:${sessionId}`;
+    let chatHistory = [];
+
+    try {
+      const storedHistory = await redisClient.get(historyKey);
+      if (storedHistory) {
+        chatHistory = JSON.parse(storedHistory);
+      }
+    } catch (redisErr) {
+      console.error('Redis read error:', redisErr);
+    }
+
+    // Initialize model
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Format the prompt with proper message structure
-    const prompt = `You are the camping assistant of a website inspired from Yelp where there are campgrounds and a system of  dynamic reviews is available . Answer the following user's message :
-    User question: ${message}
-    Guidelines:
-    - Be helpful and friendly
-    - Keep responses under 2 sentences`
+    // Build conversation context with proper format
+    const chat = model.startChat({
+      history: [
+        {
+          role: "user",
+          parts: [{ text: "You are a camping assistant for a Yelp-like campground review website. Be friendly, helpful, and keep responses concise (1-2 sentences). Focus on camping-related questions but be polite with off-topic queries." }]
+        },
+        {
+          role: "model",
+          parts: [{ text: "Understood! I'm ready to help with campground recommendations, camping gear advice, and general outdoor tips. How can I assist you today?" }]
+        },
+        ...chatHistory
+      ]
+    });
 
-
-    // Generate content
-    const result = await model.generateContent(prompt); // Just pass the string directly
+    // Generate response
+    const result = await chat.sendMessage(message);
     const response = await result.response;
-    const text = response.text();
-    
+    const text = await response.text();
+
+    // Update chat history (keep last 6 exchanges)
+    const updatedHistory = [
+      ...chatHistory.slice(-10), // Keep last 5 exchanges (10 messages)
+      { role: "user", parts: [{ text: message }] },
+      { role: "model", parts: [{ text: text }] }
+    ];
+
+    // Store in Redis with expiration
+    await redisClient.setEx(historyKey, SESSION_TIMEOUT, JSON.stringify(updatedHistory));
+
     res.json({ reply: text });
   } catch (err) {
-    console.error("Gemini error:", err);
+    console.error("Chatbot error:", err);
     res.status(500).json({ 
-      error: "AI is currently unavailable. Try again later!",
-      details: err.message 
+      error: "Our camping assistant is taking a break. Try again later!",
+      details: process.env.NODE_ENV === 'development' ? err.message : undefined
     });
   }
 };
