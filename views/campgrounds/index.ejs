@@ -88,7 +88,7 @@
             <img 
             src="<%= campground.images[0].url %>" 
             alt="<%= campground.title %>"
-        class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700" >
+        class="w-full h-full object-cover " >
 
             <% }else{ %>
                 <img 
@@ -101,16 +101,16 @@
          
           
           <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
-            <div class="transform translate-y-10 group-hover:translate-y-0 transition duration-500">
+            <div >
               <span class="text-xs uppercase tracking-widest text-emerald-400"><%= campground.location %></span>
               <h3 class="text-2xl font-serif text-white mt-2 mb-3"><%= campground.title %></h3>
               <p class="text-gray-300 mb-4 line-clamp-2"><%= campground.description %></p>
             </div>
             
-            <div class="opacity-0 group-hover:opacity-100 transition duration-500 delay-100">
+            <div>
               <a 
                 href="/campgrounds/<%= campground._id %>" 
-                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-full text-sm font-medium hover:shadow-lg hover:shadow-emerald-500/20 transition-all"
+                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-full text-sm font-medium hover:shadow-lg hover:shadow-emerald-500/20 transform hover:scale-105 transition"
               >
                 Discover Retreat
                 <i class="fas fa-arrow-right ml-2 text-sm"></i>

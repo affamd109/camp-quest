@@ -43,11 +43,11 @@ const seedDB = async () => {
             price,
             images: [
                    {
-                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/v1743852381/CampQuest/gxzrbiurqbkaieghjhim.jpg',
+                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
                       filename: 'CampQuest/gxzrbiurqbkaieghjhim'
                     },
                     {
-                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/v1743852388/CampQuest/gl5hyedfg2hlugjgcnzo.jpg',
+                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746606179/CampQuest/ysmnsidb8yqhlucie0rz.jpg',
                       filename: 'CampQuest/gl5hyedfg2hlugjgcnzo'
                     }
                   ]

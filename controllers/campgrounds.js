@@ -60,8 +60,6 @@ module.exports.updateCampground = async (req, res) => {
     }
 
     console.log( 'after : ' , campground);
-
-
     req.flash('success', 'Successfully updated campground!');
     res.redirect(`/campgrounds/${campground._id}`)
 }

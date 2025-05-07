@@ -20,7 +20,7 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const mongoSanitize = require('express-mongo-sanitize');
-const helmet = require('helmet');
+
 
 
 
@@ -28,6 +28,7 @@ const campRoutes = require('./routes/campRoutes.js');
 const reviewRoutes = require('./routes/reviewRoutes.js');
 const userRoutes = require('./routes/userRoutes.js');
 const chatBotRoutes = require('./routes/chatBotRoutes.js');
+const { contentSecurityPolicy } = require('helmet');
 
 mongoose.connect('mongodb://127.0.0.1:27017/campquest');
 
@@ -58,7 +59,7 @@ const sessionConfig = {
     name : 'session',
     secret : 'thisisasecret',
     resave : false,
-    saveUninitialised : true,
+    saveUninitialized : true,
     cookie : {
         httpOnly : true,
         // secure : true,
@@ -71,6 +72,7 @@ const sessionConfig = {
 
 app.use(session(sessionConfig));
 app.use(flash());
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -91,11 +93,11 @@ app.use((req , res , next) =>{
     next();
 })
 
-app.get('/fakeUser' , async (req , res) =>{
-    const user = new User({email : "aff@gmail.com" , username : "aff109"});
-    const newUser = await User.register(user , 'chicken');
-    res.send(newUser);
-})
+// app.get('/fakeUser' , async (req , res) =>{
+//     const user = new User({email : "aff@gmail.com" , username : "aff109"});
+//     const newUser = await User.register(user , 'chicken');
+//     res.send(newUser);
+// })
 
 
 app.use('/' , userRoutes);
