@@ -46,6 +46,22 @@ const seedDB = async () => {
                       url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
                       filename: 'CampQuest/gxzrbiurqbkaieghjhim'
                     },
+                   {
+                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
+                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
+                    },
+                   {
+                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/v1746729726/CampQuest/mpcyi1qvy2psnwdkapkh.jpg',
+                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
+                    },
+                   {
+                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
+                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
+                    },
+                   {
+                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
+                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
+                    },
                     {
                       url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746606179/CampQuest/ysmnsidb8yqhlucie0rz.jpg',
                       filename: 'CampQuest/gl5hyedfg2hlugjgcnzo'
