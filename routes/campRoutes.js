@@ -10,11 +10,12 @@ const upload = multer({storage}); //This tells us to upload img in the storage w
 
 const Campground = require('../models/campground');
 
-router.route('/')
+router.route('/') //YAHAN sirf '/' likha hai toh iska ye matlab nahi ki ye home route hai.. it actually means /campgrounds (i have set this up in app.js)
     .get(catchAsync(campgrounds.index))
     .post(isLoggedIn,  upload.array('image'),validateCampground, catchAsync(campgrounds.createCampground))
 
-router.get('/new', isLoggedIn, campgrounds.renderNewForm)
+    
+router.get('/new', isLoggedIn, campgrounds.renderNewForm)//Similarly here also .. /new is actually /campgrounds/new
 
 router.route('/:id')
     .get(catchAsync(campgrounds.showCampground))

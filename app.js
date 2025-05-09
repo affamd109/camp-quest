@@ -128,7 +128,6 @@ app.use('/campgrounds/:id/reviews' ,reviewRoutes );
 app.use('/chatbot' , chatBotRoutes);
 
 
-
 app.get('/', (req, res) => {
     res.render('home');
 })
