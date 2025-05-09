@@ -83,7 +83,7 @@
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <% campgrounds.forEach(campground => { %>
-        <div class="group relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 h-[500px]">
+        <div class="group relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 h-[400px] md:h-[500px] lg:h-[500px]">
           <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
 
           <% if(campground.images.length){ %>
@@ -112,7 +112,7 @@
             <div>
               <a 
                 href="/campgrounds/<%= campground._id %>" 
-                class="inline-flex items-center px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-full text-sm font-medium hover:shadow-lg hover:shadow-emerald-500/20 transform hover:scale-105 transition"
+                class="inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-full text-sm font-medium hover:shadow-lg hover:shadow-emerald-500/20 transform hover:scale-105 transition"
               >
                 Discover Retreat
                 <i class="fas fa-arrow-right ml-2 text-sm"></i>
