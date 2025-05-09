@@ -144,6 +144,6 @@ app.use((err, req, res, next) => {  /*This is the inbuilt express error handler 
 })
 
 
-app.listen(PORT, () => {
-    console.log("Listening on port 3000");
-})
+app.listen(PORT, '0.0.0.0', () => {
+    console.log("Serving on port 3000");
+});
