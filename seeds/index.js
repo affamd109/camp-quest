@@ -40,28 +40,13 @@ const seedDB = async () => {
         const random1000 = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
-            author : '67eea9fc6dc5fdcf6f79e212',
+            // author : '67eea9fc6dc5fdcf6f79e212',//For locqalhost
+            author : '681e674e92768bac7874cb2d',//For locqalhost
             location: `${cities[random1000].city}, ${cities[random1000].state}`,
             title: `${sample(descriptors)} ${sample(places)}`,
             description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam dolores vero perferendis laudantium, consequuntur voluptatibus nulla architecto, sit soluta esse iure sed labore ipsam a cum nihil atque molestiae deserunt!',
             price,
             images: [
-                   {
-                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
-                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
-                    },
-                   {
-                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
-                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
-                    },
-                   {
-                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/v1746729726/CampQuest/mpcyi1qvy2psnwdkapkh.jpg',
-                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
-                    },
-                   {
-                      url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
-                      filename: 'CampQuest/gxzrbiurqbkaieghjhim'
-                    },
                    {
                       url: 'https://res.cloudinary.com/dgixw9flq/image/upload/q_auto,f_auto/v1746605985/CampQuest/ny1u4ztkm4y1n3kfiqhy.jpg',
                       filename: 'CampQuest/gxzrbiurqbkaieghjhim'
