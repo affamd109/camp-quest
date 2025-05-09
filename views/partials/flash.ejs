@@ -1,17 +1,17 @@
-<div class="fixed top-[100px] right-[20px] z-50 space-y-2">
+<div class="fixed top-[80px] sm:top-[100px] right-[10px] sm:right-[20px] z-50 space-y-2">
     <% if(success && success.length) { %>
-        <div class="flash-message w-sm bg-gray-900 border border-gray-800 text-green-400 px-5 py-3 rounded-lg shadow-2xl relative translate-x-10 opacity-0 transition-all duration-500 ease-out" role="alert">
+        <div class="flash-message w-[calc(100vw-40px)] sm:w-sm bg-gray-900 border border-gray-800 text-green-400 px-4 sm:px-5 py-2 sm:py-3 rounded-lg shadow-2xl relative translate-x-10 opacity-0 transition-all duration-500 ease-out" role="alert">
             <span class="block sm:inline font-semibold"><%= success %></span>
-            <button type="button" class="absolute  top-2 right-3 hover:scale-125 transition-transform duration-200" onclick="this.parentElement.remove();">
-                <span class="text-green-400 text-xl pt-10 font-bold">&times;</span>
+            <button type="button" class="absolute top-1 sm:top-2 right-2 sm:right-3 hover:scale-125 transition-transform duration-200" onclick="this.parentElement.remove();">
+                <span class="text-green-400 text-xl font-bold">&times;</span>
             </button>
         </div>
     <% } %>
 
     <% if(error && error.length) { %>
-        <div class="flash-message w-sm bg-gray-900 border border-gray-800 text-red-500 px-5 py-3 rounded-lg shadow-2xl relative translate-x-10 opacity-0 transition-all duration-500 ease-out" role="alert">
+        <div class="flash-message w-[calc(100vw-40px)] sm:w-sm bg-gray-900 border border-gray-800 text-red-500 px-4 sm:px-5 py-2 sm:py-3 rounded-lg shadow-2xl relative translate-x-10 opacity-0 transition-all duration-500 ease-out" role="alert">
             <span class="block sm:inline font-semibold"><%= error %></span>
-            <button type="button" class="absolute top-2 right-3 hover:scale-125 transition-transform duration-200" onclick="this.parentElement.remove();">
+            <button type="button" class="absolute top-1 sm:top-2 right-2 sm:right-3 hover:scale-125 transition-transform duration-200" onclick="this.parentElement.remove();">
                 <span class="text-red-500 text-xl font-bold">&times;</span>
             </button>
         </div>

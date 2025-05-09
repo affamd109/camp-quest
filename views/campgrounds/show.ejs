@@ -79,6 +79,18 @@
                         </div>
                     </div>
 
+                    <div class="flex mx-auto p-5 rounded-2xl border border-gray-800 justify-between items-center">
+                        <div>
+                            <span class="text-xl md:text-2xl font-bold text-white">
+                                <span class="text-blue-400">Price : </span>  $<%= campground.price %>
+                                    <span class="text-gray-400 text-lg">/ night</span>
+                        </div>
+
+                        <button class="text-gray-400 hover:text-white transition-colors">
+                            <i class="far fa-heart text-xl"></i>
+                        </button>
+                    </div>
+
                     <!-- Highlights Section -->
                     <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
                         <h3 class="text-xl font-serif font-bold mb-4 flex items-center gap-2">
@@ -149,7 +161,7 @@
                         </h3>
                         <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-xl overflow-hidden">
                             <div class="w-full h-64 bg-gray-800 flex items-center justify-center text-gray-600">
-                                <i class="fas fa-map text-4xl"></i>
+                                <i class="fas fa-map text-4xl pl-4"></i>
                                 <span class="ml-2">Map of <%= campground.location %></span>
                             </div>
                         </div>
@@ -163,7 +175,7 @@
                 <!-- Right Column - Booking Card -->
                 <div class="border-t-2 border-b-2 border-gray-800 p-6 top-4 h-fit">
                     <div class="border-b border-gray-800 pb-6 mb-6">
-                        <div class="flex justify-between items-center">
+                        <!-- <div class="flex justify-between items-center">
                             <div>
                                 <span class="text-2xl font-bold text-white">
                                     $<%= campground.price %>
@@ -173,7 +185,7 @@
                             <button class="text-gray-400 hover:text-white transition-colors">
                                 <i class="far fa-heart text-xl"></i>
                             </button>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- Booking Widget -->
