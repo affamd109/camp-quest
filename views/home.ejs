@@ -1,2 +1,161 @@
-<% layout('layouts/boilerplate')%>
+<% layout('layouts/boilerplate') %>
+<%- include('./partials/navbar') %>
 
+
+
+<div class="min-h-screen bg-gray-900">
+  <!-- Hero Section with Parallax Effect -->
+  <section class="relative h-screen overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-b from-black/80 to-black/30"></div>
+      <img 
+        src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+        alt="Luxury wilderness"
+        class="w-full h-full object-cover transform scale-110"
+        data-speed="0.8"
+      >
+    </div>
+    
+    <div class="relative z-10 h-full flex items-center justify-center px-6">
+      <div class="text-center w-full max-w-7xl">
+        <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 font-serif tracking-tight">
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Elevated</span> Wilderness
+        </h1>
+        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+          Where nature's grandeur meets uncompromising luxury. Discover sanctuaries designed for those who demand excellence.
+        </p>
+        <a href="#campgrounds" class="inline-block px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300 transform hover:scale-105">
+          Explore Retreats
+        </a>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-10 left-0 right-0 flex justify-center z-10">
+      <a href="#campgrounds" class="animate-bounce">
+        <i class="fas fa-chevron-down text-white text-3xl"></i>
+      </a>
+    </div>
+  </section>
+
+
+  <section class="py-20 bg-gradient-to-b from-gray-900 to-gray-800 px-6">
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="text-center mb-16">
+        <span class="text-sm uppercase tracking-widest text-emerald-400 mb-4 inline-block">Redefining Outdoor Luxury</span>
+        <h2 class="text-3xl md:text-4xl font-serif text-white font-light">The Art of <span class="font-medium">Discerning</span> Wilderness</h2>
+      </div>
+      
+      <div class="grid md:grid-cols-3 gap-12">
+        <div class="text-center">
+          <div class="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-gem text-emerald-400 text-2xl"></i>
+          </div>
+          <h3 class="text-xl text-white mb-3">Exclusive Locations</h3>
+          <p class="text-gray-400">Handpicked sites offering privacy and breathtaking vistas unavailable to the ordinary traveler.</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-shield-alt text-emerald-400 text-2xl"></i>
+          </div>
+          <h3 class="text-xl text-white mb-3">Uncompromising Comfort</h3>
+          <p class="text-gray-400">Plush amenities and bespoke services that transform camping into a lavish experience.</p>
+        </div>
+        
+        <div class="text-center">
+          <div class="w-16 h-16 bg-emerald-500/10 rounded-full flex items-center justify-center mx-auto mb-6">
+            <i class="fas fa-leaf text-emerald-400 text-2xl"></i>
+          </div>
+          <h3 class="text-xl text-white mb-3">Sustainable Opulence</h3>
+          <p class="text-gray-400">Eco-conscious luxury that honors the environment while pampering our guests.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Campgrounds Section - -->
+  <section id="campgrounds" class="py-20 bg-gray-800 px-6">
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="text-center mb-16">
+        <span class="text-sm uppercase tracking-widest text-emerald-400 mb-4 inline-block">Our Curated Collection</span>
+        <h2 class="text-3xl md:text-4xl font-serif text-white font-light">Luxury <span class="font-medium">Wilderness</span> Retreats</h2>
+      </div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <% campgrounds.forEach(campground => { %>
+        <div class="group relative overflow-hidden rounded-xl shadow-xl hover:shadow-2xl transition-all duration-500 h-[400px] md:h-[500px] lg:h-[500px]">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent z-10"></div>
+
+          <% if(campground.images.length){ %>
+            <img 
+            src="<%= campground.images[0].url %>" 
+            alt="<%= campground.title %>"
+        class="w-full h-full object-cover " >
+
+            <% }else{ %>
+                <img 
+                src="https://images.unsplash.com/photo-1483728642387-6c3bdd6c93e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" 
+                alt="<%= campground.title %>"
+            class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700" >
+                
+
+                <% } %>
+         
+          
+          <div class="absolute bottom-0 left-0 right-0 z-20 p-6">
+            <div >
+              <span class="text-xs uppercase tracking-widest text-emerald-400"><%= campground.location %></span>
+              <h3 class="text-2xl font-serif text-white mt-2 mb-3"><%= campground.title %></h3>
+              <p class="text-gray-300 mb-4 line-clamp-2"><%= campground.description %></p>
+            </div>
+            
+            <div>
+              <a 
+                href="/campgrounds/<%= campground._id %>" 
+                class="inline-flex items-center px-4 py-2 md:px-6 md:py-3 bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-full text-sm font-medium hover:shadow-lg hover:shadow-emerald-500/20 transform hover:scale-105 transition"
+              >
+                Discover Retreat
+                <i class="fas fa-arrow-right ml-2 text-sm"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <% }) %>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section (call to action ) - -->
+  <section class="py-24 bg-gradient-to-b from-gray-800 to-gray-900 px-6">
+    <div class="max-w-7xl mx-auto w-full text-center">
+      <span class="text-sm uppercase tracking-widest text-emerald-400 mb-4 inline-block">Ready for an Unforgettable Experience?</span>
+      <h2 class="text-3xl md:text-5xl font-serif text-white font-light mb-8">Begin Your <span class="font-medium">Luxury Wilderness</span> Journey</h2>
+      <p class="text-xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed">
+        Our concierge team is standing by to craft your perfect outdoor luxury experience.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center gap-4">
+
+        <a 
+          href="/campgrounds" 
+          class="px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-500 text-white rounded-full font-medium hover:shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
+        >
+          Browse All Retreats
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!--  Parallax Effect script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const heroImage = document.querySelector('[data-speed]');
+    
+    if (heroImage) {
+      window.addEventListener('scroll', function() {
+        const scrollPosition = window.pageYOffset;
+        heroImage.style.transform = `scale(1.1) translateY(${scrollPosition * 0.3}px)`;
+      });
+    }
+  });
+</script>

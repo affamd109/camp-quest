@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const mongoose = require('mongoose');
 const cities = require('./cities');
 const { places, descriptors } = require('./seedHelpers');
@@ -6,7 +8,9 @@ const Campground = require('../models/campground');
 //Here the path includes 2 dots , cuz one is to get out from views and then other to go into models directory
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/campquest');
+// mongoose.connect('mongodb://127.0.0.1:27017/campquest');
+
+mongoose.connect(process.env.DB_URL);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));

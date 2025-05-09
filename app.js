@@ -32,9 +32,9 @@ const chatBotRoutes = require('./routes/chatBotRoutes.js');
 // const { contentSecurityPolicy } = require('helmet');
 
 // 'mongodb://127.0.0.1:27017/campquest'
-// const dbURL = process.env.DB_URL
+const dbUrl = process.env.DB_URL
 
-const dbUrl = 'mongodb://127.0.0.1:27017/campquest'
+// const dbUrl = 'mongodb://127.0.0.1:27017/campquest'
 
 mongoose.connect(dbUrl);
 
@@ -67,7 +67,7 @@ const store = MongoStore.create({
     mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'thisisasecret!'
+        secret: process.env.SECRET || 'fallbacksecret',
     }
 });
 
@@ -78,12 +78,12 @@ store.on("error" , function(e){
 const sessionConfig = {
     store,
     name : 'session',
-    secret : 'thisisasecret',
+    secret: process.env.SECRET || 'fallbacksecret',
     resave : false,
     saveUninitialized : true,
     cookie : {
         httpOnly : true,
-        // secure : true,
+        secure: process.env.NODE_ENV === 'production', 
         expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
         maxAge: 1000 * 60 * 60 * 24 * 7
 
@@ -119,6 +119,7 @@ app.use((req , res , next) =>{
 //     const newUser = await User.register(user , 'chicken');
 //     res.send(newUser);
 // })
+
 
 
 app.use('/' , userRoutes);
