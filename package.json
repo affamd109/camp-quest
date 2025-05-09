@@ -4,7 +4,9 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently \"nodemon app.js\" \"npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch\""
+    "dev": "concurrently \"nodemon app.js\" \"npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css --watch\"",
+    "build": "npx tailwindcss -i ./public/css/input.css -o ./public/css/style.css",
+    "start": "node app.js"
   },
   "author": "",
   "license": "ISC",
