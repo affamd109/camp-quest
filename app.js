@@ -129,7 +129,7 @@ app.use('/chatbot' , chatBotRoutes);
 
 
 app.get('/', (req, res) => {
-    res.render('home');
+    res.redirect('/campgrounds')
 })
 
 app.all(/(.*)/, (req, res, next) => {
