@@ -62,7 +62,7 @@
       // Add user message to chat
       messagesDiv.innerHTML += `
         <div class="mb-4 text-right">
-          <div class="inline-block bg-blue-100 text-blue-900 px-4 py-2 rounded-lg max-w-xs">
+          <div class="inline-block bg-blue-100 text-blue-900 break-words px-4 py-2 rounded-lg max-w-xs">
             ${userMessage}
           </div>
         </div>
@@ -113,7 +113,7 @@
         // Add bot response
         messagesDiv.innerHTML += `
           <div class="mb-4">
-            <div class="inline-block bg-gray-700 text-gray-200 px-4 py-2 rounded-lg max-w-xs">
+            <div class="inline-block bg-gray-700 break-words  text-gray-200 px-4 py-2 rounded-lg max-w-xs">
               ${data.reply}
             </div>
           </div>
