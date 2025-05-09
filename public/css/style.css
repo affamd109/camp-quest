@@ -333,6 +333,12 @@
   .z-50 {
     z-index: 50;
   }
+  .z-100 {
+    z-index: 100;
+  }
+  .z-1000 {
+    z-index: 1000;
+  }
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -928,6 +934,9 @@
   .bg-black {
     background-color: var(--color-black);
   }
+  .bg-black\/95 {
+    background-color: color-mix(in oklab, var(--color-black) 95%, transparent);
+  }
   .bg-blue-100 {
     background-color: var(--color-blue-100);
   }
@@ -1168,6 +1177,9 @@
   .text-right {
     text-align: right;
   }
+  .align-middle {
+    vertical-align: middle;
+  }
   .font-sans {
     font-family: var(--font-sans);
   }
@@ -1327,6 +1339,9 @@
   }
   .opacity-0 {
     opacity: 0%;
+  }
+  .opacity-15 {
+    opacity: 15%;
   }
   .opacity-80 {
     opacity: 80%;
@@ -1643,6 +1658,11 @@
       display: inline;
     }
   }
+  .sm\:max-w-md {
+    @media (width >= 40rem) {
+      max-width: var(--container-md);
+    }
+  }
   .sm\:flex-row {
     @media (width >= 40rem) {
       flex-direction: row;
@@ -1746,6 +1766,16 @@
   .md\:items-center {
     @media (width >= 48rem) {
       align-items: center;
+    }
+  }
+  .md\:items-start {
+    @media (width >= 48rem) {
+      align-items: flex-start;
+    }
+  }
+  .md\:justify-between {
+    @media (width >= 48rem) {
+      justify-content: space-between;
     }
   }
   .md\:space-y-0 {

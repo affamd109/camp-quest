@@ -1,175 +1,183 @@
 <%- layout('layouts/boilerplate') %>
-<%- include('../partials/navbar2') %>
+    <%- include('../partials/navbar2') %>
 
 
-<div class="container mx-auto px-4 py-12">
-    <!-- Main Header -->
-    <div class="mb-8 border-b border-gray-800 pb-8">
-        <div class="flex justify-between items-start">
-            <div>
-                <h1 class="text-4xl font-bold font-serif text-blue-400 mb-2"><%= campground.title %></h1>
-                <div class="flex items-center gap-4 text-gray-400">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-map-marker-alt text-blue-400"></i>
-                        <%= campground.location %>
-                    </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-star text-amber-400"></i>
-                        5.0 
-                    </div>
-                </div>
-            </div>
-         
-        </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-    <!-- Left Column -->
-        <div class="lg:col-span-2 space-y-8">
-  <!-- Image Gallery -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <!-- Top Row -->
-                 
-                <div class="md:col-span-2 overflow-hidden border border-gray-800 relative">
-                    <div id="campgroundCarousel" class="relative w-full h-60 md:h-72">
-                        <div class="relative h-full overflow-hidden rounded-lg">
-                            <% campground.images.forEach((img, i) => { %>
-                                <div class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out <%= i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' %>">
-                                    <img src="<%= img.url %>" alt="Camp Image"
-                                         class="w-full h-full object-cover">
-                                </div>
-                            <% }) %>
-                        </div>
-                
-                        <% if (campground.images.length > 1) { %>
-                        <!-- Previous Button -->
-                        <button id="prevBtn" type="button"
-                            class="absolute top-1/2 left-2 z-20 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full">
-                            &#10094;
-                        </button>
-                
-                        <!-- Next Button -->
-                        <button id="nextBtn" type="button"
-                            class="absolute top-1/2 right-2 z-20 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full">
-                            &#10095;
-                        </button>
-                        <% } %>
-                    </div>
-                </div>
-
-                <div class="overflow-hidden border border-gray-800">
-                    <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                         class="w-full h-60 md:h-72 object-cover hover:scale-105 transition-transform duration-500">
-                </div>
-            
-                <!-- Bottom Row (full width across all columns) -->
-                <div class="md:col-span-3 grid grid-cols-2 space-x-6">
-                    <div class="overflow-hidden border border-gray-800">
-                        <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                             class="w-full h-44 object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                    <div class="overflow-hidden border border-gray-800">
-                        <img src="https://images.unsplash.com/photo-1505741263612-3ee2cce6dc17?q=80&w=1638&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                             class="w-full h-44 object-cover hover:scale-105 transition-transform duration-500">
-                    </div>
-                </div>
-            </div>
-
-            <!-- Highlights Section -->
-            <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
-                <h3 class="text-xl font-serif font-bold mb-4 flex items-center gap-2">
-                    <i class="fas fa-sparkles text-blue-400"></i> 
-                    <span>Camp Highlights</span>
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="flex items-start gap-3">
-                        <div class="bg-blue-900/30 p-2 rounded-lg">
-                            <i class="fas fa-mountain text-blue-400"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-medium">Scenic Views</h4>
-                            <p class="text-sm text-gray-400">Panoramic mountain and lake views from every tent site</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="bg-blue-900/30 p-2 rounded-lg">
-                            <i class="fas fa-fire text-orange-400"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-medium">Community Fire Pit</h4>
-                            <p class="text-sm text-gray-400">Nightly campfires with storytelling and s'mores</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="bg-blue-900/30 p-2 rounded-lg">
-                            <i class="fas fa-fish text-green-400"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-medium">Fishing Spot</h4>
-                            <p class="text-sm text-gray-400">Private access to a stocked fishing pond</p>
-                        </div>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="bg-blue-900/30 p-2 rounded-lg">
-                            <i class="fas fa-hiking text-amber-400"></i>
-                        </div>
-                        <div>
-                            <h4 class="font-medium">Hiking Trails</h4>
-                            <p class="text-sm text-gray-400">5 miles of well-maintained trails through the property</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Description -->
-            <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
-                <h3 class="text-xl font-serif font-bold mb-4">About this campsite</h3>
-                <ul class="space-y-3 text-gray-300 list-disc pl-5">
-                    <li>Nestled in the heart of <%= campground.location %>, this breathtaking campground offers an unforgettable outdoor experience</li>
-                    <li>Wake up to the sounds of nature and enjoy stunning sunrise views over the surrounding landscape</li>
-                    <li>Spacious tent sites with leveled platforms, fire rings, and picnic tables</li>
-                    <li>Central lodge area with modern restrooms featuring hot showers</li>
-                    <li>Fully-equipped communal kitchen for guest use</li>
-                    <li>Cozy lounge area with board games and books for rainy days</li>
-                </ul>
-            </div>
-            <!-- Map -->
-            <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
-                <h3 class="text-xl font-serif font-bold mb-4 flex items-center gap-2">
-                    <i class="fas fa-map-marked-alt text-blue-400"></i>
-                    <span>Location</span>
-                </h3>
-                <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-xl overflow-hidden">
-                    <div class="w-full h-64 bg-gray-800 flex items-center justify-center text-gray-600">
-                        <i class="fas fa-map text-4xl"></i>
-                        <span class="ml-2">Map of <%= campground.location %></span>
-                    </div>
-                </div>
-                <div class="mt-4 text-sm text-gray-400">
-                    <p><i class="fas fa-info-circle mr-2 text-blue-400"></i> Detailed directions will be provided after booking</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Right Column - Booking Card -->
-        <div class="border-t-2 border-b-2 border-gray-800 p-6 top-4 h-fit">
-            <div class="border-b border-gray-800 pb-6 mb-6">
-                <div class="flex justify-between items-center">
+        <div class="container mx-auto px-4 py-12">
+            <!-- Main Header -->
+            <div class="mb-8 border-b border-gray-800 pb-8">
+                <div class="flex flex-col justify-center items-center md:justify-between md:items-start">
                     <div>
-                        <span class="text-2xl font-bold text-white">
-                            $<%= campground.price %>
-                            <span class="text-gray-400 text-lg">/ night</span>
+                        <h1 class="text-4xl font-bold font-serif text-blue-400 mb-2">
+                            <%= campground.title %>
+                        </h1>
+                        <div class="flex items-center gap-4 text-gray-400">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-map-marker-alt text-blue-400"></i>
+                                <%= campground.location %>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-star text-amber-400"></i>
+                                5.0
+                            </div>
                         </div>
-                        
-                    <button class="text-gray-400 hover:text-white transition-colors">
-                        <i class="far fa-heart text-xl"></i>
-                    </button>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- Booking Widget -->
-            <!-- <div class="mb-6">
+            <!-- Main Content -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column -->
+                <div class="lg:col-span-2 space-y-8">
+                    <!-- Image Gallery -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Top Row -->
+
+                        <div class="md:col-span-2 overflow-hidden border border-gray-800 relative">
+                            <div id="campgroundCarousel" class="relative w-full h-60 md:h-72">
+                                <div class="relative h-full overflow-hidden rounded-lg">
+                                    <% campground.images.forEach((img, i)=> { %>
+                                        <div
+                                            class="carousel-item absolute inset-0 transition-opacity duration-700 ease-in-out <%= i === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0' %>">
+                                            <img src="<%= img.url %>" alt="Camp Image"
+                                                class="w-full h-full object-cover">
+                                        </div>
+                                        <% }) %>
+                                </div>
+
+                                <% if (campground.images.length> 1) { %>
+                                    <!-- Previous Button -->
+                                    <button id="prevBtn" type="button"
+                                        class="absolute top-1/2 left-2 z-20 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full">
+                                        &#10094;
+                                    </button>
+
+                                    <!-- Next Button -->
+                                    <button id="nextBtn" type="button"
+                                        class="absolute top-1/2 right-2 z-20 -translate-y-1/2 bg-gray-800 bg-opacity-50 hover:bg-opacity-80 text-white p-2 rounded-full">
+                                        &#10095;
+                                    </button>
+                                    <% } %>
+                            </div>
+                        </div>
+
+                        <div class="overflow-hidden border border-gray-800">
+                            <img src="https://images.unsplash.com/photo-1537905569824-f89f14cceb68?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                class="w-full h-60 md:h-72 object-cover hover:scale-105 transition-transform duration-500">
+                        </div>
+
+                        <!-- Bottom Row (full width across all columns) -->
+                        <div class="md:col-span-3 grid grid-cols-2 space-x-6">
+                            <div class="overflow-hidden border border-gray-800">
+                                <img src="https://images.unsplash.com/photo-1504851149312-7a075b496cc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                    class="w-full h-44 object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                            <div class="overflow-hidden border border-gray-800">
+                                <img src="https://images.unsplash.com/photo-1505741263612-3ee2cce6dc17?q=80&w=1638&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                                    class="w-full h-44 object-cover hover:scale-105 transition-transform duration-500">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlights Section -->
+                    <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
+                        <h3 class="text-xl font-serif font-bold mb-4 flex items-center gap-2">
+                            <i class="fas fa-sparkles text-blue-400"></i>
+                            <span>Camp Highlights</span>
+                        </h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="flex items-start gap-3">
+                                <div class="bg-blue-900/30 p-2 rounded-lg">
+                                    <i class="fas fa-mountain text-blue-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Scenic Views</h4>
+                                    <p class="text-sm text-gray-400">Panoramic mountain and lake views from every tent
+                                        site</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="bg-blue-900/30 p-2 rounded-lg">
+                                    <i class="fas fa-fire text-orange-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Community Fire Pit</h4>
+                                    <p class="text-sm text-gray-400">Nightly campfires with storytelling and s'mores</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="bg-blue-900/30 p-2 rounded-lg">
+                                    <i class="fas fa-fish text-green-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Fishing Spot</h4>
+                                    <p class="text-sm text-gray-400">Private access to a stocked fishing pond</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start gap-3">
+                                <div class="bg-blue-900/30 p-2 rounded-lg">
+                                    <i class="fas fa-hiking text-amber-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-medium">Hiking Trails</h4>
+                                    <p class="text-sm text-gray-400">5 miles of well-maintained trails through the
+                                        property</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
+                        <h3 class="text-xl font-serif font-bold mb-4">About this campsite</h3>
+                        <ul class="space-y-3 text-gray-300 list-disc pl-5">
+                            <li>Nestled in the heart of <%= campground.location %>, this breathtaking campground offers
+                                    an unforgettable outdoor experience</li>
+                            <li>Wake up to the sounds of nature and enjoy stunning sunrise views over the surrounding
+                                landscape</li>
+                            <li>Spacious tent sites with leveled platforms, fire rings, and picnic tables</li>
+                            <li>Central lodge area with modern restrooms featuring hot showers</li>
+                            <li>Fully-equipped communal kitchen for guest use</li>
+                            <li>Cozy lounge area with board games and books for rainy days</li>
+                        </ul>
+                    </div>
+                    <!-- Map -->
+                    <div class="bg-gray-900/50 p-6 rounded-2xl border border-gray-800">
+                        <h3 class="text-xl font-serif font-bold mb-4 flex items-center gap-2">
+                            <i class="fas fa-map-marked-alt text-blue-400"></i>
+                            <span>Location</span>
+                        </h3>
+                        <div class="aspect-w-16 aspect-h-9 bg-gray-800 rounded-xl overflow-hidden">
+                            <div class="w-full h-64 bg-gray-800 flex items-center justify-center text-gray-600">
+                                <i class="fas fa-map text-4xl"></i>
+                                <span class="ml-2">Map of <%= campground.location %></span>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-sm text-gray-400">
+                            <p><i class="fas fa-info-circle mr-2 text-blue-400"></i> Detailed directions will be
+                                provided after booking</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Booking Card -->
+                <div class="border-t-2 border-b-2 border-gray-800 p-6 top-4 h-fit">
+                    <div class="border-b border-gray-800 pb-6 mb-6">
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <span class="text-2xl font-bold text-white">
+                                    $<%= campground.price %>
+                                        <span class="text-gray-400 text-lg">/ night</span>
+                            </div>
+
+                            <button class="text-gray-400 hover:text-white transition-colors">
+                                <i class="far fa-heart text-xl"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Booking Widget -->
+                    <!-- <div class="mb-6">
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div class="border border-gray-700 rounded-lg p-3">
                         <label class="block text-xs text-gray-400 mb-1">CHECK-IN</label>
@@ -188,223 +196,235 @@
                     Check availability
                 </button>
             </div> -->
-            
-            <div class="space-y-3 mt-4 p-3 pl-5 rounded-xl border border-gray-800  text-gray-300">
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-home text-blue-400"></i> <span>Entire campground</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-users text-blue-400"></i> <span>Up to 10 guests</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-bed text-blue-400"></i> <span>5 tent spots</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-bath text-blue-400"></i> <span>Shared bathroom</span>
-                </div>
-                <div class="flex items-center gap-2">
-                    <i class="fas fa-wifi text-blue-400"></i> <span>Limited WiFi</span>
-                </div>
-            </div>
 
-            <!-- weather widget -->
-
-            <div class="mt-6 p-4 rounded-xl border border-gray-800 ">
-                <h4 class="font-medium mb-3 flex items-center gap-2">
-                    <i class="fas fa-cloud-sun text-blue-400"></i>
-                    Current Conditions
-                </h4>
-                <div class="flex items-center justify-between text-sm">
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-temperature-high text-amber-400 text-lg"></i>
-                        <div>
-                            <div class="text-gray-200">24°C / 75°F</div>
-                            <div class="text-gray-400 text-xs">Daytime High</div>
+                    <div class="space-y-3 mt-4 p-3 pl-5 rounded-xl border border-gray-800  text-gray-300">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-home text-blue-400"></i> <span>Entire campground</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-users text-blue-400"></i> <span>Up to 10 guests</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-bed text-blue-400"></i> <span>5 tent spots</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-bath text-blue-400"></i> <span>Shared bathroom</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-wifi text-blue-400"></i> <span>Limited WiFi</span>
                         </div>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <i class="fas fa-temperature-low text-blue-400 text-lg"></i>
-                        <div>
-                            <div class="text-gray-200">12°C / 54°F</div>
-                            <div class="text-gray-400 text-xs">Nighttime Low</div>
+
+                    <!-- weather widget -->
+
+                    <div class="mt-6 p-4 rounded-xl border border-gray-800 ">
+                        <h4 class="font-medium mb-3 flex items-center gap-2">
+                            <i class="fas fa-cloud-sun text-blue-400"></i>
+                            Current Conditions
+                        </h4>
+                        <div class="flex items-center justify-between text-sm">
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-temperature-high text-amber-400 text-lg"></i>
+                                <div>
+                                    <div class="text-gray-200">24°C / 75°F</div>
+                                    <div class="text-gray-400 text-xs">Daytime High</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fas fa-temperature-low text-blue-400 text-lg"></i>
+                                <div>
+                                    <div class="text-gray-200">12°C / 54°F</div>
+                                    <div class="text-gray-400 text-xs">Nighttime Low</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-sm text-gray-400 flex items-center gap-2">
+                            <i class="fas fa-wind text-gray-400"></i>
+                            <span>Light breeze, 8 km/h</span>
                         </div>
                     </div>
-                </div>
-                <div class="mt-3 text-sm text-gray-400 flex items-center gap-2">
-                    <i class="fas fa-wind text-gray-400"></i>
-                    <span>Light breeze, 8 km/h</span>
-                </div>
-            </div>
 
 
-            <!-- Safety Info -->
-            <div class="mt-6 p-4 rounded-xl border border-gray-800">
-                <h4 class="font-medium mb-3 flex items-center gap-2">
-                    <i class="fas fa-shield-alt text-blue-400"></i>
-                    Safety & Property
-                </h4>
-                <div class="space-y-2 text-sm text-gray-400">
-                    <div class="flex items-start gap-2">
-                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
-                        <span>Carbon monoxide alarms</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
-                        <span>Smoke detectors</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
-                        <span>First aid kits</span>
-                    </div>
-                    <div class="flex items-start gap-2">
-                        <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
-                        <span>Fire extinguishers</span>
-                    </div>
-                </div>
-            </div>
-
-            <% if(currentUser && campground.author.equals(currentUser)){ %>
-
-                <div class="border-t border-gray-800 pt-6 space-y-4">
-                    <a href="/campgrounds/<%=campground._id%>/edit"
-                       class="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-gray-300 transition-colors">
-                        <i class="fas fa-edit"></i>
-                        Edit Campground
-                    </a>
-                    <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
-                        <button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-800 hover:bg-red-700 rounded-xl text-red-100 transition-colors">
-                            <i class="fas fa-trash"></i>
-                            Delete Campground
-                        </button>
-                    </form>
-                </div>
-
-                <% } %>
-
-
-        </div>
-    </div>
-
-    
-
-    <!-- Amenities -->
-    <div class="max-w-3xl mt-12 p-8 rounded-2xl bg-gray-900/50 border border-gray-800">
-        <h3 class="text-2xl font-serif font-bold mb-6 flex items-center gap-2">
-            <i class="fas fa-umbrella-beach text-blue-400"></i>
-            <span>Popular amenities</span>
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
-                    <i class="fa-solid fa-couch text-lg text-blue-400"></i>
-                </div>
-                <span class="text-md">Lounge area</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
-                    <i class="fa-solid fa-wind text-lg text-blue-400"></i>
-                </div>
-                <span class="text-md">Air conditioning</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
-                    <i class="fa-solid fa-kitchen-set text-lg text-blue-400"></i>
-                </div>
-                <span class="text-md">Kitchen</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
-                    <i class="fa-solid fa-soap text-lg text-blue-400"></i>
-                </div>
-                <span class="text-md">Laundry facilities</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
-                    <i class="fa-solid fa-temperature-low text-lg text-blue-400"></i>
-                </div>
-                <span class="text-md">Refrigerator</span>
-            </div>
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
-                    <i class="fa-solid fa-square-parking text-lg text-blue-400"></i>
-                </div>
-                <span class="text-md">Free parking</span>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reviews -->
-    <div class="mt-12 max-w-2xl">
-        <h2 class="text-3xl font-bold text-white mb-6">
-            <i class="fas fa-comments mr-2 text-blue-400"></i> 
-            <span class="font-serif">Guest Reviews</span> 
-            <span class="text-gray-400 text-lg">(<%= campground.reviews.length %>)</span>
-        </h2>
-
-        <!-- Review Form -->
-        <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 mb-8">
-            <h3 class="text-xl font-semibold text-white mb-3">Write a Review</h3>
-            <form id="review-form" action="/campgrounds/<%=campground._id%>/reviews" method="POST">
-                <div class="mb-6">
-                    <div class="flex gap-2 text-xl text-amber-400 mb-4">
-                        <% for(let i=1; i<=5; i++) { %>
-                            <button type="button" class="rating-star hover:text-amber-300 transition-colors" data-value="<%= i %>">
-                                <i class="far fa-star"></i>
-                            </button>
-                        <% } %>
-                    </div>
-                    <input type="hidden" name="review[rating]" id="rating-value" required>
-                </div>
-
-                <div class="mb-6">
-                    <textarea name="review[body]" rows="4" 
-                              class="w-full p-4 bg-gray-800 border border-gray-700 rounded-xl text-gray-300 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
-                              placeholder="Share your experience..." required></textarea>
-                </div>
-
-                <button class="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-3 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2">
-                    <i class="fas fa-paper-plane"></i>
-                    Submit Review
-                </button>
-            </form>
-        </div>
-
-        <!-- Reviews List -->
-        <div class="space-y-6">
-            <% for(let review of campground.reviews) { %>
-                <div class="bg-gray-900 p-6 rounded-2xl border border-gray-800 hover:border-gray-700 transition-colors">
-                    <div class="flex items-center gap-4 mb-4">
-                        <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
-                            <i class="fas fa-user text-gray-400 text-xl"></i>
-                        </div>
-                        <div class="flex-1">
-                            <p class="font-medium mb-1 text-gray-200"><%= review.author.username %></p>
-                            <div class="flex items-center gap-1 text-amber-400 text-sm">
-                                <% for(let i=0; i<review.rating; i++) { %>
-                                    <i class="fas fa-star"></i>
-                                <% } %>
+                    <!-- Safety Info -->
+                    <div class="mt-6 p-4 rounded-xl border border-gray-800">
+                        <h4 class="font-medium mb-3 flex items-center gap-2">
+                            <i class="fas fa-shield-alt text-blue-400"></i>
+                            Safety & Property
+                        </h4>
+                        <div class="space-y-2 text-sm text-gray-400">
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                                <span>Carbon monoxide alarms</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                                <span>Smoke detectors</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                                <span>First aid kits</span>
+                            </div>
+                            <div class="flex items-start gap-2">
+                                <i class="fas fa-check-circle text-green-400 mt-0.5"></i>
+                                <span>Fire extinguishers</span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="flex justify-between">
-                        <div class="ml-16 mr-2 flex-1 break-words overflow-hidden">
-                            <p class="text-gray-400"><%= review.body %></p>
+                    <% if(currentUser && campground.author.equals(currentUser)){ %>
+
+                        <div class="border-t border-gray-800 pt-6 space-y-4">
+                            <a href="/campgrounds/<%=campground._id%>/edit"
+                                class="flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 hover:bg-gray-700 rounded-xl text-gray-300 transition-colors">
+                                <i class="fas fa-edit"></i>
+                                Edit Campground
+                            </a>
+                            <form action="/campgrounds/<%=campground._id%>?_method=DELETE" method="POST">
+                                <button
+                                    class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-red-800 hover:bg-red-700 rounded-xl text-red-100 transition-colors">
+                                    <i class="fas fa-trash"></i>
+                                    Delete Campground
+                                </button>
+                            </form>
                         </div>
 
-                        <div>
-                            <% if(currentUser && review.author.equals(currentUser)){ %>
-                                <form action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-                                    <button class="btn cursor-pointer btn-sm bg-red-800 hover:bg-red-700 text-red-100 px-4 py-1 rounded-lg transition-colors">
-                                        <i class="fas fa-trash text-sm"></i> <span class="text-sm"> Delete</span> 
-                                    </button>
-                                </form>
-                                <% } %>
+                        <% } %>
+
+
+                </div>
+            </div>
+
+
+
+            <!-- Amenities -->
+            <div class="max-w-3xl mt-12 p-8 rounded-2xl bg-gray-900/50 border border-gray-800">
+                <h3 class="text-2xl font-serif font-bold mb-6 flex items-center gap-2">
+                    <i class="fas fa-umbrella-beach text-blue-400"></i>
+                    <span>Popular amenities</span>
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-gray-300">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
+                            <i class="fa-solid fa-couch text-lg text-blue-400"></i>
                         </div>
+                        <span class="text-md">Lounge area</span>
                     </div>
-                    
-                    <!-- Review Reactions -->
-                    <!-- <div class="mt-4 ml-16 flex items-center gap-4 text-sm text-gray-500">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
+                            <i class="fa-solid fa-wind text-lg text-blue-400"></i>
+                        </div>
+                        <span class="text-md">Air conditioning</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
+                            <i class="fa-solid fa-kitchen-set text-lg text-blue-400"></i>
+                        </div>
+                        <span class="text-md">Kitchen</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
+                            <i class="fa-solid fa-soap text-lg text-blue-400"></i>
+                        </div>
+                        <span class="text-md">Laundry facilities</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
+                            <i class="fa-solid fa-temperature-low text-lg text-blue-400"></i>
+                        </div>
+                        <span class="text-md">Refrigerator</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-blue-900/30 flex items-center justify-center">
+                            <i class="fa-solid fa-square-parking text-lg text-blue-400"></i>
+                        </div>
+                        <span class="text-md">Free parking</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews -->
+            <div class="mt-12 max-w-2xl">
+                <h2 class="text-3xl font-bold text-white mb-6">
+                    <i class="fas fa-comments mr-2 text-blue-400"></i>
+                    <span class="font-serif">Guest Reviews</span>
+                    <span class="text-gray-400 text-lg">(<%= campground.reviews.length %>)</span>
+                </h2>
+
+                <!-- Review Form -->
+                <div class="bg-gray-900 p-5 rounded-2xl border border-gray-800 mb-8">
+                    <h3 class="text-xl font-semibold text-white mb-3">Write a Review</h3>
+                    <form id="review-form" action="/campgrounds/<%=campground._id%>/reviews" method="POST">
+                        <div class="mb-6">
+                            <div class="flex gap-2 text-xl text-amber-400 mb-4">
+                                <% for(let i=1; i<=5; i++) { %>
+                                    <button type="button" class="rating-star hover:text-amber-300 transition-colors"
+                                        data-value="<%= i %>">
+                                        <i class="far fa-star"></i>
+                                    </button>
+                                    <% } %>
+                            </div>
+                            <input type="hidden" name="review[rating]" id="rating-value" required>
+                        </div>
+
+                        <div class="mb-6">
+                            <textarea name="review[body]" rows="4"
+                                class="w-full p-4 bg-gray-800 border border-gray-700 rounded-xl text-gray-300 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors"
+                                placeholder="Share your experience..." required></textarea>
+                        </div>
+
+                        <button
+                            class="bg-blue-600 hover:bg-blue-700 cursor-pointer text-white px-3 py-2 rounded-lg font-semibold transition-colors flex items-center gap-2">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Review
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Reviews List -->
+                <div class="space-y-6">
+                    <% for(let review of campground.reviews) { %>
+                        <div
+                            class="bg-gray-900 p-6 rounded-2xl border border-gray-800 hover:border-gray-700 transition-colors">
+                            <div class="flex items-center gap-4 mb-4">
+                                <div class="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center">
+                                    <i class="fas fa-user text-gray-400 text-xl"></i>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium mb-1 text-gray-200">
+                                        <%= review.author.username %>
+                                    </p>
+                                    <div class="flex items-center gap-1 text-amber-400 text-sm">
+                                        <% for(let i=0; i<review.rating; i++) { %>
+                                            <i class="fas fa-star"></i>
+                                            <% } %>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex justify-between">
+                                <div class="ml-16 mr-2 flex-1 break-words overflow-hidden">
+                                    <p class="text-gray-400">
+                                        <%= review.body %>
+                                    </p>
+                                </div>
+
+                                <div>
+                                    <% if(currentUser && review.author.equals(currentUser)){ %>
+                                        <form
+                                            action="/campgrounds/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                            method="POST">
+                                            <button
+                                                class="btn cursor-pointer btn-sm bg-red-800 hover:bg-red-700 text-red-100 px-4 py-1 rounded-lg transition-colors">
+                                                <i class="fas fa-trash text-sm"></i> <span class="text-sm">
+                                                    Delete</span>
+                                            </button>
+                                        </form>
+                                        <% } %>
+                                </div>
+                            </div>
+
+                            <!-- Review Reactions -->
+                            <!-- <div class="mt-4 ml-16 flex items-center gap-4 text-sm text-gray-500">
                         <button class="hover:text-blue-400 transition-colors flex items-center gap-1">
                             <i class="far fa-thumbs-up"></i> 12
                         </button>
@@ -415,109 +435,108 @@
                             <i class="fas fa-share"></i> Share
                         </button>
                     </div> -->
+                        </div>
+                        <% } %>
                 </div>
-            <% } %>
-        </div>
-    </div>
+            </div>
 
 
 
-<script>
-    // Enhanced Rating System
-    document.querySelectorAll('.rating-star').forEach(star => {
-        star.addEventListener('click', function() {
-            const rating = parseInt(this.dataset.value);
-            const stars = document.querySelectorAll('.rating-star');
-            
-            stars.forEach((star, index) => {
-                if(index < rating) {
-                    star.querySelector('i').className = 'fas fa-star';
-                    star.classList.add('scale-110', 'text-amber-300');
-                    star.classList.remove('text-amber-400');
-                } else {
-                    star.querySelector('i').className = 'far fa-star';
-                    star.classList.remove('scale-110', 'text-amber-300');
-                    star.classList.add('text-amber-400');
-                }
-            });
-            
-            document.getElementById('rating-value').value = rating;
-        });
+            <script>
+                // Enhanced Rating System
+                document.querySelectorAll('.rating-star').forEach(star => {
+                    star.addEventListener('click', function () {
+                        const rating = parseInt(this.dataset.value);
+                        const stars = document.querySelectorAll('.rating-star');
 
-        // Add hover effect
-        star.addEventListener('mouseover', function() {
-            const rating = parseInt(this.dataset.value);
-            const stars = document.querySelectorAll('.rating-star');
-            
-            stars.forEach((star, index) => {
-                if(index < rating) {
-                    star.querySelector('i').className = 'fas fa-star';
-                    star.classList.add('text-amber-300');
-                }
-            });
-        });
+                        stars.forEach((star, index) => {
+                            if (index < rating) {
+                                star.querySelector('i').className = 'fas fa-star';
+                                star.classList.add('scale-110', 'text-amber-300');
+                                star.classList.remove('text-amber-400');
+                            } else {
+                                star.querySelector('i').className = 'far fa-star';
+                                star.classList.remove('scale-110', 'text-amber-300');
+                                star.classList.add('text-amber-400');
+                            }
+                        });
 
-        star.addEventListener('mouseout', function() {
-            const currentRating = parseInt(document.getElementById('rating-value').value) || 0;
-            const stars = document.querySelectorAll('.rating-star');
-            
-            stars.forEach((star, index) => {
-                if(index >= currentRating) {
-                    star.querySelector('i').className = 'far fa-star';
-                    star.classList.remove('text-amber-300');
-                    star.classList.add('text-amber-400');
-                }
-            });
-        });
-    });
+                        document.getElementById('rating-value').value = rating;
+                    });
 
-    // Form Validation with better feedback
-    document.getElementById('review-form').addEventListener('submit', function(e) {
-        const rating = document.getElementById('rating-value').value;
-        const textarea = this.querySelector('textarea');
-        
-        if(!rating) {
-            e.preventDefault();
-            const starsContainer = this.querySelector('.rating-star').parentNode;
-            starsContainer.classList.add('animate-pulse');
-            setTimeout(() => starsContainer.classList.remove('animate-pulse'), 1000);
-            
-            // Scroll to rating
-            starsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-        
-    
-    });
+                    // Add hover effect
+                    star.addEventListener('mouseover', function () {
+                        const rating = parseInt(this.dataset.value);
+                        const stars = document.querySelectorAll('.rating-star');
 
-    document.addEventListener('DOMContentLoaded', () => {
-        const items = document.querySelectorAll('#campgroundCarousel .carousel-item');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        let current = 0;
+                        stars.forEach((star, index) => {
+                            if (index < rating) {
+                                star.querySelector('i').className = 'fas fa-star';
+                                star.classList.add('text-amber-300');
+                            }
+                        });
+                    });
 
-        function showSlide(index) {
-            items.forEach((item, i) => {
-                if (i === index) {
-                    item.classList.add('opacity-100', 'z-10');
-                    item.classList.remove('opacity-0', 'z-0');
-                } else {
-                    item.classList.remove('opacity-100', 'z-10');
-                    item.classList.add('opacity-0', 'z-0');
-                }
-            });
-        }
+                    star.addEventListener('mouseout', function () {
+                        const currentRating = parseInt(document.getElementById('rating-value').value) || 0;
+                        const stars = document.querySelectorAll('.rating-star');
 
-        if (nextBtn && prevBtn) {
-            nextBtn.addEventListener('click', () => {
-                current = (current + 1) % items.length;
-                showSlide(current);
-            });
+                        stars.forEach((star, index) => {
+                            if (index >= currentRating) {
+                                star.querySelector('i').className = 'far fa-star';
+                                star.classList.remove('text-amber-300');
+                                star.classList.add('text-amber-400');
+                            }
+                        });
+                    });
+                });
 
-            prevBtn.addEventListener('click', () => {
-                current = (current - 1 + items.length) % items.length;
-                showSlide(current);
-            });
-        }
-    });
-</script>
+                // Form Validation with better feedback
+                document.getElementById('review-form').addEventListener('submit', function (e) {
+                    const rating = document.getElementById('rating-value').value;
+                    const textarea = this.querySelector('textarea');
 
+                    if (!rating) {
+                        e.preventDefault();
+                        const starsContainer = this.querySelector('.rating-star').parentNode;
+                        starsContainer.classList.add('animate-pulse');
+                        setTimeout(() => starsContainer.classList.remove('animate-pulse'), 1000);
+
+                        // Scroll to rating
+                        starsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+
+
+                });
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    const items = document.querySelectorAll('#campgroundCarousel .carousel-item');
+                    const prevBtn = document.getElementById('prevBtn');
+                    const nextBtn = document.getElementById('nextBtn');
+                    let current = 0;
+
+                    function showSlide(index) {
+                        items.forEach((item, i) => {
+                            if (i === index) {
+                                item.classList.add('opacity-100', 'z-10');
+                                item.classList.remove('opacity-0', 'z-0');
+                            } else {
+                                item.classList.remove('opacity-100', 'z-10');
+                                item.classList.add('opacity-0', 'z-0');
+                            }
+                        });
+                    }
+
+                    if (nextBtn && prevBtn) {
+                        nextBtn.addEventListener('click', () => {
+                            current = (current + 1) % items.length;
+                            showSlide(current);
+                        });
+
+                        prevBtn.addEventListener('click', () => {
+                            current = (current - 1 + items.length) % items.length;
+                            showSlide(current);
+                        });
+                    }
+                });
+            </script>
