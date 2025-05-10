@@ -1,7 +1,7 @@
 const User = require('../models/user');
 
 module.exports.renderRegister = (req, res) => {
-    console.log(req.user._id)
+    // console.log(req.user._id)
     res.render('users/register');
 }
 
