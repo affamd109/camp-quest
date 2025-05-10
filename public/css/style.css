@@ -265,9 +265,6 @@
   .relative {
     position: relative;
   }
-  .sticky {
-    position: sticky;
-  }
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
@@ -477,9 +474,6 @@
   }
   .h-64 {
     height: calc(var(--spacing) * 64);
-  }
-  .h-80 {
-    height: calc(var(--spacing) * 80);
   }
   .h-86 {
     height: calc(var(--spacing) * 86);
@@ -964,17 +958,8 @@
   .py-7 {
     padding-block: calc(var(--spacing) * 7);
   }
-  .py-10 {
-    padding-block: calc(var(--spacing) * 10);
-  }
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
-  }
-  .py-14 {
-    padding-block: calc(var(--spacing) * 14);
-  }
-  .py-19 {
-    padding-block: calc(var(--spacing) * 19);
   }
   .py-20 {
     padding-block: calc(var(--spacing) * 20);
