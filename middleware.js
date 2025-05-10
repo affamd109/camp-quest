@@ -7,16 +7,18 @@ const review = require('./models/review');
 
 
 
-module.exports.isLoggedIn = (req , res , next) =>{
-    console.log('Req.User : ' , req.user);
-    if(!req.isAuthenticated()){
-         req.session.returnTo = req.originalUrl;
-        req.flash('error' , 'You must be signed in! ');
+module.exports.isLoggedIn = (req, res, next) => {
+    if (!req.isAuthenticated()) {
+        if (req.method === 'GET') {
+            req.session.returnTo = req.originalUrl;
+        } else if (req.headers.referer) {
+            req.session.returnTo = req.headers.referer;
+        }
+        req.flash('error', 'You must be signed in!');
         return res.redirect('/login');
     }
     next();
-
-}
+};
 
 module.exports.storeReturnTo = (req, res, next) => {
     if (req.session.returnTo) {
