@@ -49,7 +49,7 @@ module.exports.getChatbotResponse = async (req, res) => {
     const response = await result.response;
     const text = await response.text();
 
-    // Update chat history (keep last 6 exchanges)
+    // Update chat history ( i will be keeping last 6 exchanges)
     const updatedHistory = [
       ...chatHistory.slice(-10), // Keep last 5 exchanges (10 messages)
       { role: "user", parts: [{ text: message }] },
