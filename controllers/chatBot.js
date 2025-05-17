@@ -29,7 +29,7 @@ module.exports.getChatbotResponse = async (req, res) => {
     // Initialize model
     const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
-    // Build conversation context with proper format
+
     const chat = model.startChat({
       history: [
         {
