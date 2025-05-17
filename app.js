@@ -115,12 +115,6 @@ app.use((req , res , next) =>{
     next();
 })
 
-// app.get('/fakeUser' , async (req , res) =>{
-//     const user = new User({email : "aff@gmail.com" , username : "aff109"});
-//     const newUser = await User.register(user , 'chicken');
-//     res.send(newUser);
-// })
-
 
 
 app.use('/' , userRoutes);
