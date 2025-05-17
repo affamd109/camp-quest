@@ -6,7 +6,7 @@ const redisClient = createClient({
 
 redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
-// Connect to Redis when your app starts
+// Connect to Redis when my app starts
 redisClient.connect().then(() => {
   console.log('Connected to Redis');
 }).catch(console.error);
